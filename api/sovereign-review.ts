@@ -112,7 +112,9 @@ function extractJson(text: string): unknown {
 
 function stringArray(value: unknown, fallback: string): string[] {
   if (!Array.isArray(value)) return [fallback];
-  const cleaned = value.filter((item): item is string => typeof item === "string" && item.trim());
+  const cleaned = value.filter(
+    (item): item is string => typeof item === "string" && item.trim().length > 0,
+  );
   return cleaned.length > 0 ? cleaned : [fallback];
 }
 
