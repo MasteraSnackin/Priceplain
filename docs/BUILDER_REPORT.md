@@ -20,9 +20,11 @@ The Export tab now also includes a full read-only report text fallback. If clipb
 Follow-up builder improvements added after the first pass:
 
 - Demo mode hides the intake form for a cleaner judge flow.
-- Metering shows a Solvimon import preview with object counts and JSON handoff.
+- Metering shows a Solvimon import preview with `meters`, `plans`, `invoice_items`, `credit_policies`, object counts and JSON handoff.
+- The Solvimon JSON handoff can be copied or downloaded.
 - Export includes preset comparison and Markdown download.
 - Provider status reports whether Claude and FLock keys are configured without exposing secrets.
+- README screenshots and `docs/PITCH.md` were added for judging and GitHub review.
 - `npm run test:browser` checks rendered judge routes in headless Chrome.
 
 ## Files Changed
@@ -34,6 +36,8 @@ Follow-up builder improvements added after the first pass:
 - `plain/acceptance-tests.plain`
 - `README.md`
 - `docs/BUILDER_REPORT.md`
+- `docs/PITCH.md`
+- `docs/assets/`
 - `scripts/browser-tests.mjs`
 - `scripts/smoke.mjs`
 - `src/styles.css`
@@ -46,7 +50,7 @@ Follow-up builder improvements added after the first pass:
 - `npm run test:domain` passed.
 - `npm run test:browser` passed.
 - `npm run smoke` passed.
-- Browser check on `http://localhost:3001`:
+- Browser check on `http://localhost:3002`:
   - Clicking `Business` changed the URL to `/?tab=business` and selected `Business`.
   - Reloading `/?tab=business` kept `Business` selected.
   - Clicking `Sovereign` changed the URL to `/?tab=sovereign` and selected `Sovereign`.
@@ -57,6 +61,7 @@ Follow-up builder improvements added after the first pass:
 - Routed content check:
   - `/?tab=business` renders `Submission story` and `Solvimon fit`.
   - `/?tab=sovereign` renders `FLock Sovereign AI` and `Commercial transparency`.
+  - `/?tab=metering` renders `Solvimon import preview`, `Copy import JSON` and `Download JSON`.
   - `/?tab=export` renders full report text with pricing, metering, sovereign review and track coverage.
 
 ## Known Limitations

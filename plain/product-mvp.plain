@@ -23,7 +23,7 @@ core_flow:
   - System calculates cost per active customer and marginal unit economics
   - System generates Free, Starter, Growth, and Scale pricing tiers
   - System proposes metering events for billing and analytics
-  - System creates a Solvimon import preview with tier rules, invoice line items, credit policy, metering events, and JSON handoff data
+  - System creates a Solvimon import preview with meters, plans, invoice_items, credit_policies, implementation notes, and JSON handoff data
   - System simulates revenue, cost of goods sold, gross margin, and break-even over twelve months
   - System stress-tests pricing with model-cost shock, usage spike, conversion drop, and churn rise scenarios
   - System compares saved AI-app presets so judges can see the model works across different business shapes
@@ -47,7 +47,8 @@ success_criteria:
   - A judge can understand the startup use case in under one minute
   - The generated tiers are tied to usage costs rather than arbitrary price guesses
   - The pricing output includes explicit metering assumptions
-  - The Solvimon import preview includes invoice line items, tier rules, credit policy, and JSON handoff data
+  - The Solvimon import preview includes meters, plans, invoice_items, credit_policies, implementation notes, and JSON handoff data
+  - The Solvimon import preview can be copied or downloaded as JSON
   - The simulation makes margin and free-tier risk visible
   - Sensitivity checks show how fragile the model is under cost, usage, conversion, and churn changes
   - The export tab compares the saved presets

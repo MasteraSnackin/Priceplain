@@ -12,7 +12,9 @@ Implemented the highest-value improvements that do not depend on unconfirmed spo
 - Demo mode for judge presentation.
 - Provider-key status checks.
 - Markdown report download.
+- Solvimon JSON copy/download.
 - Saved preset comparison.
+- README screenshots and pitch pack.
 - Focused deterministic domain tests.
 - Browser-render route checks.
 
@@ -30,6 +32,12 @@ Implemented the highest-value improvements that do not depend on unconfirmed spo
   - metering events,
   - credit policy,
   - implementation notes.
+- Added `SolvimonImportPreview` output with:
+  - `meters`,
+  - `plans`,
+  - `invoice_items`,
+  - `credit_policies`,
+  - copy/download JSON actions.
 - Added pricing sensitivity scenarios:
   - model-cost shock,
   - usage spike,
@@ -38,6 +46,8 @@ Implemented the highest-value improvements that do not depend on unconfirmed spo
 - Added demo mode to hide the intake panel and focus the live presentation on Pricing, Metering, Simulation and Export.
 - Added `/api/provider-status` to report whether Claude and FLock keys are configured without exposing secrets or calling providers.
 - Added a one-click Markdown report download.
+- Added a dedicated pitch pack in `docs/PITCH.md`.
+- Added README screenshots under `docs/assets/`.
 - Added saved preset comparison for loaded cost, starter price, month-12 revenue, margin and audit score.
 - Added `npm run test:browser` for headless Chrome render checks across the key demo routes.
 - Added `vercel.json` with the Vite build command and `dist` output directory.
@@ -66,7 +76,7 @@ npm audit --audit-level=moderate
 
 ## Remaining Limits
 
-- The billing export is a Priceplain handoff format, not a live Solvimon integration.
+- The Solvimon import preview is a Priceplain handoff format, not a live Solvimon integration.
 - Exact Codeplain config requirements are still unconfirmed.
 - Live Claude and FLock success paths still require real provider keys.
 - Browser checks currently verify rendered routes, not every click interaction.

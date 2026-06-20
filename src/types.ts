@@ -106,6 +106,49 @@ export interface BillingImplementationExport {
   implementationNotes: string[];
 }
 
+export interface SolvimonMeterPreview {
+  code: string;
+  event_name: string;
+  billing_use: string;
+  aggregation: "sum_quantity" | "event_count";
+  properties: string[];
+}
+
+export interface SolvimonPlanPreview {
+  plan_id: string;
+  name: string;
+  billing_mode: BillingTierRule["billingMode"];
+  base_monthly_price: number;
+  included_units: number;
+  overage_rate: number;
+  seat_policy: string;
+}
+
+export interface SolvimonInvoiceItemPreview {
+  code: string;
+  description: string;
+  quantity_metric: string;
+  unit_price: number;
+  tier_ids: string[];
+}
+
+export interface SolvimonImportPreview {
+  schema_version: string;
+  source_schema: string;
+  generated_by: "priceplain";
+  product: {
+    name: string;
+    currency: Currency;
+    value_metric: string;
+    pricing_model: string;
+  };
+  meters: SolvimonMeterPreview[];
+  plans: SolvimonPlanPreview[];
+  invoice_items: SolvimonInvoiceItemPreview[];
+  credit_policies: string[];
+  implementation_notes: string[];
+}
+
 export interface SensitivityScenario {
   id: string;
   label: string;

@@ -10,7 +10,7 @@ All nine requested Markdown skill tasks have been re-read, re-applied and verifi
 
 During the deep browser check, one real issue was found and fixed: blocked clipboard writes could expose a raw browser error and left no full report fallback. The app now routes blocked clipboard attempts to Export, shows a safe message, and exposes the full generated report in a labelled read-only textarea.
 
-Follow-up improvements were also completed for the final hackathon demo: demo mode, Solvimon import preview, provider-key status checks, Markdown download, preset comparison, Vercel build config and browser-render route tests.
+Follow-up improvements were also completed for the final hackathon demo: demo mode, Solvimon import preview, Solvimon JSON copy/download, provider-key status checks, Markdown download, preset comparison, README screenshots, pitch pack, Vercel build config and browser-render route tests.
 
 ## Skill Completion Matrix
 

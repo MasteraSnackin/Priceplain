@@ -24,12 +24,12 @@ import {
   analysePricing,
   buildBillingImplementationExport,
   buildSensitivityScenarios,
+  buildSolvimonImportPreview,
   formatCompactCurrency,
   formatCurrency,
 } from "./pricingEngine";
 import { assessSovereignty } from "./sovereignReview";
 import type {
-  BillingImplementationExport,
   BillingMotion,
   ClaudeRefinement,
   CostDriver,
@@ -38,6 +38,7 @@ import type {
   PricingInputs,
   ProductStage,
   SensitivityScenario,
+  SolvimonImportPreview,
   SovereignReview,
 } from "./types";
 
@@ -137,7 +138,7 @@ function slugifyLabel(value: string): string {
 function buildReport(
   inputs: PricingInputs,
   analysis: ReturnType<typeof analysePricing>,
-  billingExport: BillingImplementationExport,
+  solvimonImportPreview: SolvimonImportPreview,
   sensitivityScenarios: SensitivityScenario[],
   providerStatus: ProviderStatusSuccessResponse | null,
   refinement: ClaudeRefinement | null,
@@ -226,7 +227,7 @@ ${providerLines}
 
 ## Solvimon import preview
 \`\`\`json
-${JSON.stringify(billingExport, null, 2)}
+${JSON.stringify(solvimonImportPreview, null, 2)}
 \`\`\`
 
 ## Sensitivity checks
@@ -254,6 +255,7 @@ function App() {
   const [inputs, setInputs] = useState<PricingInputs>(demoInputs);
   const [activeTab, setActiveTab] = useState<Tab>(initialTab);
   const [copied, setCopied] = useState(false);
+  const [jsonCopied, setJsonCopied] = useState(false);
   const [copyError, setCopyError] = useState("");
   const [refinement, setRefinement] = useState<ClaudeRefinement | null>(null);
   const [aiError, setAiError] = useState("");
@@ -269,6 +271,14 @@ function App() {
   const billingExport = useMemo(
     () => buildBillingImplementationExport(inputs, analysis),
     [inputs, analysis],
+  );
+  const solvimonImportPreview = useMemo(
+    () => buildSolvimonImportPreview(inputs, billingExport),
+    [inputs, billingExport],
+  );
+  const solvimonImportJson = useMemo(
+    () => JSON.stringify(solvimonImportPreview, null, 2),
+    [solvimonImportPreview],
   );
   const sensitivityScenarios = useMemo(() => buildSensitivityScenarios(inputs), [inputs]);
   const presetComparisons = useMemo(
@@ -301,7 +311,7 @@ function App() {
       buildReport(
         inputs,
         analysis,
-        billingExport,
+        solvimonImportPreview,
         sensitivityScenarios,
         providerStatus,
         refinement,
@@ -311,7 +321,7 @@ function App() {
     [
       inputs,
       analysis,
-      billingExport,
+      solvimonImportPreview,
       sensitivityScenarios,
       providerStatus,
       refinement,
@@ -430,17 +440,49 @@ function App() {
     }
   };
 
-  const downloadMarkdown = () => {
-    const blob = new Blob([reportText], { type: "text/markdown;charset=utf-8" });
+  const copySolvimonJson = async () => {
+    setCopyError("");
+
+    try {
+      if (!navigator.clipboard) {
+        throw new Error("Clipboard access is not available in this browser.");
+      }
+
+      await navigator.clipboard.writeText(solvimonImportJson);
+      setJsonCopied(true);
+      window.setTimeout(() => setJsonCopied(false), 1400);
+    } catch {
+      setCopyError("Clipboard access was blocked. Use Download JSON from the Metering tab.");
+    }
+  };
+
+  const downloadText = (text: string, filename: string, type: string) => {
+    const blob = new Blob([text], { type });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
 
     link.href = url;
-    link.download = `${slugifyLabel(inputs.appName)}-pricing-report.md`;
+    link.download = filename;
     document.body.appendChild(link);
     link.click();
     link.remove();
     URL.revokeObjectURL(url);
+  };
+
+  const downloadMarkdown = () => {
+    downloadText(
+      reportText,
+      `${slugifyLabel(inputs.appName)}-pricing-report.md`,
+      "text/markdown;charset=utf-8",
+    );
+  };
+
+  const downloadSolvimonJson = () => {
+    downloadText(
+      solvimonImportJson,
+      `${slugifyLabel(inputs.appName)}-solvimon-import-preview.json`,
+      "application/json;charset=utf-8",
+    );
   };
 
   const toggleDemoMode = (enabled: boolean) => {
@@ -1189,6 +1231,65 @@ function App() {
                   <p key={line}>{line}</p>
                 ))}
               </div>
+              <section className="billing-export">
+                <div className="section-heading-row">
+                  <div>
+                    <p className="eyebrow">Solvimon handoff</p>
+                    <h2>Solvimon import preview</h2>
+                  </div>
+                  <div className="inline-actions">
+                    <button className="ghost-button" onClick={copySolvimonJson} type="button">
+                      <Copy size={16} />
+                      {jsonCopied ? "JSON copied" : "Copy import JSON"}
+                    </button>
+                    <button className="ghost-button" onClick={downloadSolvimonJson} type="button">
+                      <Download size={16} />
+                      Download JSON
+                    </button>
+                  </div>
+                </div>
+                <div className="import-object-grid">
+                  <article>
+                    <span>Meters</span>
+                    <strong>{solvimonImportPreview.meters.length}</strong>
+                  </article>
+                  <article>
+                    <span>Plans</span>
+                    <strong>{solvimonImportPreview.plans.length}</strong>
+                  </article>
+                  <article>
+                    <span>Invoice lines</span>
+                    <strong>{solvimonImportPreview.invoice_items.length}</strong>
+                  </article>
+                  <article>
+                    <span>Credit policies</span>
+                    <strong>{solvimonImportPreview.credit_policies.length}</strong>
+                  </article>
+                </div>
+                <div className="billing-table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Line item</th>
+                        <th>Metric</th>
+                        <th>Unit price</th>
+                        <th>Tiers</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {solvimonImportPreview.invoice_items.map((item) => (
+                        <tr key={item.code}>
+                          <td>{item.code}</td>
+                          <td>{item.quantity_metric}</td>
+                          <td>{formatCurrency(item.unit_price, inputs.currency)}</td>
+                          <td>{item.tier_ids.join(", ")}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <pre className="json-block">{solvimonImportJson}</pre>
+              </section>
               <div className="event-list">
                 {analysis.meteringEvents.map((event) => (
                   <article className="event-card" key={event.name}>
@@ -1203,53 +1304,6 @@ function App() {
                   </article>
                 ))}
               </div>
-              <section className="billing-export">
-                <div>
-                  <p className="eyebrow">Solvimon handoff</p>
-                  <h2>Solvimon import preview</h2>
-                </div>
-                <div className="import-object-grid">
-                  <article>
-                    <span>Primary meter</span>
-                    <strong>{billingExport.primaryMeter}</strong>
-                  </article>
-                  <article>
-                    <span>Plans</span>
-                    <strong>{billingExport.tierRules.length}</strong>
-                  </article>
-                  <article>
-                    <span>Invoice lines</span>
-                    <strong>{billingExport.invoiceLineItems.length}</strong>
-                  </article>
-                  <article>
-                    <span>Credit rules</span>
-                    <strong>{billingExport.creditPolicy.length}</strong>
-                  </article>
-                </div>
-                <div className="billing-table-wrap">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Line item</th>
-                        <th>Metric</th>
-                        <th>Unit price</th>
-                        <th>Tiers</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {billingExport.invoiceLineItems.map((item) => (
-                        <tr key={item.code}>
-                          <td>{item.code}</td>
-                          <td>{item.quantityMetric}</td>
-                          <td>{formatCurrency(item.unitPrice, inputs.currency)}</td>
-                          <td>{item.tierIds.join(", ")}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <pre className="json-block">{JSON.stringify(billingExport, null, 2)}</pre>
-              </section>
             </div>
           )}
 

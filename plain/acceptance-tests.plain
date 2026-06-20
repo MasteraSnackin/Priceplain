@@ -60,8 +60,10 @@ then:
   - the summary names hybrid pricing when seats and usage both matter
   - the summary lists billing events and invoice line items
   - the metering tab shows a Solvimon import preview
-  - the preview shows primary meter, plan count, invoice line count, and credit rule count
-  - the export includes tier rules, invoice line items, metering events, credit policy, and JSON handoff data
+  - the preview shows meter count, plan count, invoice line count, and credit policy count
+  - the preview JSON contains meters, plans, invoice_items, credit_policies, and implementation_notes
+  - Copy import JSON copies the same JSON payload shown in the preview
+  - Download JSON saves the same JSON payload shown in the preview
 
 scenario: Use demo mode during judging
 given:
@@ -212,7 +214,7 @@ when:
 then:
   - every demo preset produces at least four tiers
   - paid tiers have overage rates
-  - billing export schema, primary meter, base subscription line items, and overage line items are present
+  - Solvimon preview schema, meters, plans, base subscription line items, and overage line items are present
   - sensitivity scenarios are present
   - the model-cost shock scenario increases month-12 COGS
   - sovereign review produces governance signals
@@ -225,6 +227,7 @@ when:
 then:
   - the home route renders the Priceplain shell
   - the Metering route renders the Solvimon import preview
+  - the Metering route renders Copy import JSON and Download JSON controls
   - the Simulation route renders sensitivity checks
   - the Export route renders preset comparison and Markdown download
   - the Business route renders the tightened pitch

@@ -3,6 +3,7 @@ import {
   analysePricing,
   buildBillingImplementationExport,
   buildSensitivityScenarios,
+  buildSolvimonImportPreview,
 } from "../src/pricingEngine";
 import { assessSovereignty } from "../src/sovereignReview";
 
@@ -15,6 +16,7 @@ function assert(condition: unknown, message: string): asserts condition {
 for (const preset of demoPresets) {
   const analysis = analysePricing(preset.inputs);
   const billingExport = buildBillingImplementationExport(preset.inputs, analysis);
+  const solvimonPreview = buildSolvimonImportPreview(preset.inputs, billingExport);
   const sensitivity = buildSensitivityScenarios(preset.inputs);
   const review = assessSovereignty(preset.inputs, analysis);
   const month12 = analysis.simulation[analysis.simulation.length - 1];
@@ -42,6 +44,19 @@ for (const preset of demoPresets) {
   assert(
     billingExport.invoiceLineItems.some((item) => item.code.endsWith("_usage_overage")),
     `${preset.id}: missing usage overage line item`,
+  );
+  assert(
+    solvimonPreview.schema_version === "priceplain.solvimon_preview.v1",
+    `${preset.id}: Solvimon preview schema mismatch`,
+  );
+  assert(solvimonPreview.meters.length > 0, `${preset.id}: Solvimon preview should include meters`);
+  assert(
+    solvimonPreview.plans.length === analysis.tiers.length,
+    `${preset.id}: Solvimon preview should include one plan per tier`,
+  );
+  assert(
+    solvimonPreview.invoice_items.some((item) => item.code.endsWith("_usage_overage")),
+    `${preset.id}: Solvimon preview should include usage overage invoice items`,
   );
   assert(sensitivity.length === 4, `${preset.id}: expected four sensitivity scenarios`);
   assert(Boolean(costShock), `${preset.id}: missing model cost shock scenario`);

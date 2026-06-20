@@ -979,6 +979,20 @@ td {
   margin: 0;
 }
 
+.section-heading-row {
+  align-items: flex-start;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
 .import-object-grid {
   display: grid;
   gap: 10px;
@@ -1293,9 +1307,14 @@ td {
   .sovereign-hero,
   .sovereign-actions,
   .demo-mode-strip,
+  .section-heading-row,
   .submission-card {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .inline-actions {
+    justify-content: flex-start;
   }
 
   .sovereign-score {

@@ -25,7 +25,7 @@ The MVP is intentionally small: a React/Vite front end, shared TypeScript domain
 flowchart LR
   User[Founder or Judge] --> App[React Vite Client]
   App --> Pricing[Pricing Engine]
-  Pricing --> Billing[Billing Export + Sensitivity]
+  Pricing --> Billing[Solvimon Import Preview + Sensitivity]
   App --> Governance[Sovereign Review Engine]
   App --> Plain[.plain Specs]
   App --> StatusRoute[/api/provider-status]
@@ -42,7 +42,7 @@ The browser handles the primary experience and deterministic calculations. Serve
 
 ### React Client
 
-- Responsibilities: render intake form, demo presets, generated pricing tiers, business case, sovereign review, simulation, sensitivity scenarios, metering events, billing export and export view.
+- Responsibilities: render intake form, demo presets, generated pricing tiers, business case, sovereign review, simulation, sensitivity scenarios, metering events, Solvimon import preview and export view.
 - Main technologies: React, TypeScript, Vite, Lucide React.
 - Data owned or transformed: `PricingInputs`, UI state, generated report text, provider-loading and provider-error states.
 - External dependencies: browser clipboard API, local API routes.
@@ -52,7 +52,7 @@ The browser handles the primary experience and deterministic calculations. Serve
 
 - Responsibilities: calculate cost per active customer, marginal unit cost, recommended tiers, overage rates, metering events, audit signals, revenue simulation, Solvimon import preview and sensitivity scenarios.
 - Main technologies: TypeScript functions in `src/pricingEngine.ts`.
-- Data owned or transformed: founder inputs into `PricingAnalysis`, `BillingImplementationExport` and `SensitivityScenario[]`.
+- Data owned or transformed: founder inputs into `PricingAnalysis`, `BillingImplementationExport`, `SolvimonImportPreview` and `SensitivityScenario[]`.
 - External dependencies: none.
 - Failure modes: unrealistic user inputs can produce conservative but imperfect recommendations; no historical market data is used.
 
@@ -101,13 +101,14 @@ The browser handles the primary experience and deterministic calculations. Serve
 1. User edits pricing inputs in the React app.
 2. User can switch between four demo presets or edit the assumptions directly.
 3. `analysePricing` recalculates tiers, overages, audit signals, metering events and simulation.
-4. `buildBillingImplementationExport` turns the pricing analysis into tier rules, invoice line-item templates, credit policy and JSON handoff data.
-5. `buildSensitivityScenarios` recalculates the model under cost, usage, conversion and churn shocks.
-6. `assessSovereignty` recalculates governance signals from the current pricing analysis.
-7. `/api/provider-status` reports whether live provider keys are configured.
-8. User can optionally call `/api/priceplan` for Claude pricing refinement.
-9. User can optionally call `/api/sovereign-review` for FLock sovereign AI refinement.
-10. Export view assembles pricing, Solvimon import preview, sensitivity checks, governance, preset comparison, track coverage and demo script into a copyable and downloadable Markdown report.
+4. `buildBillingImplementationExport` creates the internal tier, invoice, credit and metering handoff.
+5. `buildSolvimonImportPreview` reshapes that handoff into sponsor-facing `meters`, `plans`, `invoice_items` and `credit_policies`.
+6. `buildSensitivityScenarios` recalculates the model under cost, usage, conversion and churn shocks.
+7. `assessSovereignty` recalculates governance signals from the current pricing analysis.
+8. `/api/provider-status` reports whether live provider keys are configured.
+9. User can optionally call `/api/priceplan` for Claude pricing refinement.
+10. User can optionally call `/api/sovereign-review` for FLock sovereign AI refinement.
+11. Export view assembles pricing, Solvimon import preview, sensitivity checks, governance, preset comparison, track coverage and demo script into a copyable and downloadable Markdown report.
 
 ## Data Model
 
@@ -116,6 +117,7 @@ Core domain objects:
 - `PricingInputs`: app description, customer, value metric, currency, stage, billing motion, growth assumptions and cost drivers.
 - `PricingAnalysis`: generated pricing model, tiers, metering events, simulation, audit score, pricing-page copy and billing summary.
 - `BillingImplementationExport`: schema version, tier rules, invoice line-item templates, metering events, credit policy and implementation notes.
+- `SolvimonImportPreview`: sponsor-facing JSON preview with `meters`, `plans`, `invoice_items`, `credit_policies` and implementation notes.
 - `SensitivityScenario`: assumption change, month-12 revenue/COGS, margin delta, audit score and break-even month.
 - `SovereignReview`: governance score, verdict, signals, procurement questions, actions, FLock path and institutional buyer fit.
 - `ClaudeRefinement`: executive summary, pricing rationale, Solvimon implementation notes, Codeplain plan, suggested changes and risks.
@@ -205,7 +207,7 @@ Current observability is limited to request IDs returned in API error responses 
 ## Design Decisions and Trade-offs
 
 - Browser-first deterministic engine: keeps the core demo fast and credential-free, but means recommendations are heuristic rather than data-trained.
-- Billing export instead of direct billing-platform integration: gives judges a concrete Solvimon-style handoff without requiring sponsor credentials, but it is not a live Solvimon integration.
+- Solvimon import preview instead of direct billing-platform integration: gives judges a concrete billing handoff without requiring sponsor credentials, but it is not a live Solvimon integration.
 - Sensitivity scenarios: quickly show business risk, but use deterministic shocks rather than historical cohort data.
 - Optional AI refinement: improves sponsor fit without making the demo dependent on external providers.
 - No database: reduces setup and deployment risk, but prevents saved workspaces and audit history.

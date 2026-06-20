@@ -9,6 +9,7 @@ import type {
   PricingTier,
   SensitivityScenario,
   SimulationMonth,
+  SolvimonImportPreview,
 } from "./types";
 
 const nicePrices = [
@@ -428,6 +429,48 @@ export function buildBillingImplementationExport(
       "Use invoice line items for base subscription, included allowance, overage usage and credits.",
       "Keep pricing-plan changes versioned so historical invoices can be explained.",
     ],
+  };
+}
+
+export function buildSolvimonImportPreview(
+  inputs: PricingInputs,
+  billingExport: BillingImplementationExport,
+): SolvimonImportPreview {
+  return {
+    schema_version: "priceplain.solvimon_preview.v1",
+    source_schema: billingExport.schemaVersion,
+    generated_by: "priceplain",
+    product: {
+      name: inputs.appName || "Untitled AI app",
+      currency: billingExport.currency,
+      value_metric: billingExport.valueMetric,
+      pricing_model: billingExport.pricingModel,
+    },
+    meters: billingExport.meteringEvents.map((event) => ({
+      code: event.name,
+      event_name: event.name,
+      billing_use: event.billingUse,
+      aggregation: event.name === billingExport.primaryMeter ? "sum_quantity" : "event_count",
+      properties: event.properties,
+    })),
+    plans: billingExport.tierRules.map((tier) => ({
+      plan_id: tier.tierId,
+      name: tier.name,
+      billing_mode: tier.billingMode,
+      base_monthly_price: tier.baseMonthlyPrice,
+      included_units: tier.includedUnits,
+      overage_rate: tier.overageRate,
+      seat_policy: tier.seatPolicy,
+    })),
+    invoice_items: billingExport.invoiceLineItems.map((item) => ({
+      code: item.code,
+      description: item.description,
+      quantity_metric: item.quantityMetric,
+      unit_price: item.unitPrice,
+      tier_ids: item.tierIds,
+    })),
+    credit_policies: billingExport.creditPolicy,
+    implementation_notes: billingExport.implementationNotes,
   };
 }
 

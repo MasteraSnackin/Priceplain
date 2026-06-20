@@ -21,6 +21,8 @@ Browser render command: `npm run test:browser`
 - Local app returns HTTP 200 on `http://localhost:3002`.
 - Desktop pricing view renders Founder Intake, pricing tiers, audit signals and action buttons.
 - Business, Sovereign, Simulation, Metering and Export tabs render their key content.
+- Metering shows the Solvimon import preview above raw event details, with Copy import JSON and Download JSON actions.
+- README screenshots are present for Pricing, Metering and Export.
 - Mobile viewport at 390px renders all main tabs with no horizontal overflow.
 - Claude missing-key path preserves pricing output and shows `CONFIGURATION_ERROR` with a request id.
 - FLock missing-key path preserves the deterministic sovereign review and shows `CONFIGURATION_ERROR` with a request id.
@@ -30,7 +32,7 @@ Browser render command: `npm run test:browser`
 - Copy report writes the final report to the browser clipboard when permission allows it.
 - Export tab exposes the full report text as a fallback artefact if clipboard access is blocked.
 - Browser console showed no captured errors during the audit.
-- Static accessibility probe found 29 form controls, 0 unlabelled controls and 0 textless buttons.
+- Static accessibility probe found 29 form controls, 0 unlabelled controls and 0 textless buttons before the latest JSON export buttons were added.
 
 ## Critical Issues
 

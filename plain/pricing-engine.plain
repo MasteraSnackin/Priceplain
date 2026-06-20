@@ -28,7 +28,7 @@ rules:
   - scale tier targets businesses with commit-style pricing and priority support
   - overage rate is based on marginal cost per value unit plus margin buffer
   - risk flags are raised when free usage cost is high, target margin is not met, or metering is unclear
-  - Solvimon import preview converts generated tiers into implementation-ready tier rules and invoice line-item templates
+  - Solvimon import preview converts generated tiers into implementation-ready meters, plans, invoice items, and credit policies
   - sensitivity scenarios rerun the model for model-cost shock, usage spike, conversion drop, and churn rise
 
 outputs:
@@ -39,13 +39,16 @@ outputs:
   - pricing_page_copy
   - billing_summary
   - solvimon_import_preview:
-      schema_version: priceplain.billing.v1
+      schema_version: priceplain.solvimon_preview.v1
       includes:
-        - tier rules
-        - invoice line items
-        - metering events
-        - credit policy
+        - meters
+        - plans
+        - invoice_items
+        - credit_policies
         - implementation notes
+      actions:
+        - copy import JSON
+        - download JSON
   - preset_comparison:
       includes:
         - loaded cost

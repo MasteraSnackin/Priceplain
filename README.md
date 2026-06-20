@@ -55,7 +55,7 @@ Sources checked on 20 June 2026:
 - Pricing engine for Free, Starter, Growth and Scale tiers.
 - Gross-margin, free-tier exposure, metering clarity and pricing-model audit signals.
 - Usage-metering event suggestions for billing and analytics.
-- Solvimon import preview with tier rules, invoice line-item templates, credit policy and JSON handoff.
+- Solvimon import preview with `meters`, `plans`, `invoice_items`, credit policies and copy/download JSON actions.
 - Twelve-month revenue, COGS, paid-customer and margin simulation.
 - Sensitivity checks for model-cost shocks, usage spikes, conversion drops and churn rises.
 - Saved preset comparison for loaded cost, starter pricing, month-12 revenue, margin and audit score.
@@ -65,6 +65,7 @@ Sources checked on 20 June 2026:
 - Optional Claude refinement through a server-side API route when `ANTHROPIC_API_KEY` is configured.
 - Optional FLock refinement through a server-side API route when `FLOCK_API_KEY` is configured.
 - Export tab with pricing-page preview, track coverage, demo script, submission checklist, Markdown download and full report text fallback.
+- Dedicated pitch pack in `docs/PITCH.md`.
 - Consistent API error responses with stable codes and request IDs.
 - Shareable tab URLs for demo sections such as `/?tab=business` and `/?tab=export`.
 
@@ -126,6 +127,10 @@ Useful demo paths:
 
 For the clean judge flow, turn on Demo mode in the top bar. This hides the intake panel and keeps the visible tabs to Pricing, Metering, Simulation and Export.
 
+Pitch material:
+
+- `docs/PITCH.md` - 30-second pitch, 90-second pitch, demo flow, judge Q&A and overclaiming guardrails.
+
 Build for production:
 
 ```bash
@@ -164,16 +169,23 @@ The deterministic pricing and sovereign-review workflows work without provider c
 
 No deployed URL is recorded in this repository yet.
 
+![Priceplain pricing workspace](docs/assets/priceplain-pricing.png)
+
+![Solvimon import preview](docs/assets/priceplain-metering.png)
+
+![Export and preset comparison](docs/assets/priceplain-export.png)
+
 Recommended demo flow:
 
 1. Load the default Briefly example on `/`.
 2. Show the generated pricing tiers and audit signals.
 3. Switch presets to show the model adapting across different AI products.
 4. Open Metering to explain billing events, invoice assumptions and the Solvimon import preview.
-5. Open Simulation to show revenue, COGS, gross-margin trajectory and sensitivity checks.
-6. Open Export to show preset comparison, track coverage and the Markdown report.
-7. Open Business to explain the Solvimon and Codeplain fit if judges ask about commercial framing.
-8. Open Sovereign to show the governance review and FLock path if judges ask about secondary tracks.
+5. Copy or download the Solvimon JSON handoff.
+6. Open Simulation to show revenue, COGS, gross-margin trajectory and sensitivity checks.
+7. Open Export to show preset comparison, track coverage and the Markdown report.
+8. Open Business to explain the Solvimon and Codeplain fit if judges ask about commercial framing.
+9. Open Sovereign to show the governance review and FLock path if judges ask about secondary tracks.
 
 ## API Reference
 
@@ -264,7 +276,7 @@ npm audit --audit-level=moderate
 npm run smoke
 ```
 
-`npm run test:domain` compiles the deterministic modules to a temporary directory and checks pricing, billing export, sensitivity scenarios and sovereign review across all demo presets.
+`npm run test:domain` compiles the deterministic modules to a temporary directory and checks pricing, Solvimon import preview, sensitivity scenarios and sovereign review across all demo presets.
 
 `npm run smoke` expects the local dev server to be running and defaults to `http://localhost:3001`. Override with `SMOKE_BASE_URL` if the app is on another port. The smoke suite checks the app shell, shareable demo URLs, and stable API error envelopes without calling live AI providers.
 

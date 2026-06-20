@@ -28,7 +28,7 @@ const checks = [
   {
     name: "metering",
     path: "/?tab=metering",
-    contains: ["Solvimon import preview", "Primary meter", "priceplain.billing.v1"],
+    contains: ["Solvimon import preview", "Copy import JSON", "Download JSON", "priceplain.solvimon_preview.v1"],
   },
   {
     name: "simulation",
