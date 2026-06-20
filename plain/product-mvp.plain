@@ -33,7 +33,7 @@ core_flow:
   - Vercel AI SDK provides the structured server-side AI generation path
   - System provides a Sovereign AI Review for institutional buyers evaluating governance, data ownership, auditability, procurement risk, and FLock-compatible inference paths
   - System exports landing-page pricing copy, sensitivity checks, and a Solvimon-style billing handoff as Markdown
-  - System provides a final Submission Pack view with a winning summary, track coverage, demo script, and submission checklist
+  - System provides a final Submission Pack view with a Solvimon Judge Lens, winning summary, track coverage, demo script, and submission checklist
   - Demo mode hides the intake form and focuses the visible tabs on Pricing, Solvimon Handoff, Revenue Simulation, Startup Case, and Submission Pack
   - Documentation includes an optional Solvimon checkout guide for creating a hosted test checkout page from the Priceplain handoff using Solvimon MCP
 
@@ -53,6 +53,7 @@ success_criteria:
   - The simulation makes margin and free-tier risk visible
   - Sensitivity checks show how fragile the model is under cost, usage, conversion, and churn changes
   - The Submission Pack tab compares the saved presets
+  - The Submission Pack tab explains demand, monetisation, differentiation, post-hackathon plan, and demo tone using the Solvimon Judge Lens
   - The Submission Pack tab explains why Priceplain stands out
   - The Startup Case tab explains customer, problem, wedge, revenue path, Solvimon fit, and Codeplain fit
   - The sovereign review tab explains data sovereignty, auditability, vendor lock-in, public-sector suitability, procurement questions, governance actions, and FLock path

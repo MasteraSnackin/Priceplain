@@ -164,11 +164,12 @@ when:
 then:
   - the pricing-page preview is visible
   - the preset comparison is visible
+  - the Solvimon Judge Lens explains demand, monetisation, differentiation, post-hackathon plan, and demo tone
   - track coverage for Solvimon, Codeplain, Vercel, and FLock is visible
   - the demo script is visible
   - the submission checklist is visible
   - the full report text is visible as a fallback export artefact
-  - Copy report includes pricing, metering, Solvimon import preview, sensitivity checks, provider status, sovereign review, track coverage, demo script, and checklist
+  - Copy report includes pricing, metering, Solvimon import preview, sensitivity checks, provider status, sovereign review, Solvimon judge lens, track coverage, demo script, and checklist
   - Download Markdown saves the same report text as a markdown file
 
 scenario: Follow optional Solvimon checkout guide
@@ -247,6 +248,7 @@ then:
   - the Solvimon Handoff route renders Copy import JSON and Download JSON controls
   - the Revenue Simulation route renders sensitivity checks
   - the Submission Pack route renders preset comparison and Markdown download
+  - the Submission Pack route renders the Solvimon Judge Lens
   - the Submission Pack route renders Why Priceplain stands out
   - the Startup Case route renders the tightened pitch
   - the Sovereign route renders the FLock-aligned governance view

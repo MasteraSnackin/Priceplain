@@ -118,6 +118,38 @@ const trackCoverage = [
     evidence: "Sovereign AI Review with governance scoring and optional FLock API refinement.",
   },
 ];
+const solvimonJudgeLens = [
+  {
+    label: "Someone wants this",
+    title: "AI app founders before launch",
+    detail:
+      "First validation target: indie AI SaaS founders shipping on Vercel or Stripe who have model/API costs and need pricing before they wire billing.",
+  },
+  {
+    label: "Makes money",
+    title: "Self-serve pricing workspace",
+    detail:
+      "Start with a free pricing audit, then charge for saved workspaces, report exports, billing templates and Solvimon implementation handoff support.",
+  },
+  {
+    label: "Why it wins",
+    title: "It connects pricing to billing",
+    detail:
+      "Priceplain is not a billing system or a generic AI prompt. It joins value metrics, usage costs, tiers, overages, margin risk and billing objects.",
+  },
+  {
+    label: "After the hackathon",
+    title: "Validate, integrate, then expand",
+    detail:
+      "Next steps are customer interviews, a live Solvimon checkout adapter, pricing benchmark presets, saved workspaces and collaboration history.",
+  },
+  {
+    label: "Good vibes",
+    title: "Useful, honest and demoable",
+    detail:
+      "The product is practical about unknowns, clear about non-goals, and designed so judges can inspect the business case without hand-waving.",
+  },
+];
 const demoScript = [
   "Start with the Briefly demo app and show the value metric plus AI cost drivers.",
   "Open Pricing to show generated tiers, overage rules and gross-margin visibility.",
@@ -287,6 +319,9 @@ ${sensitivityScenarios
 ${claudeLines}
 ${sovereignLines}
 ${flockLines}
+## Solvimon judge lens
+${solvimonJudgeLens.map((item) => `- ${item.label}: ${item.title}. ${item.detail}`).join("\n")}
+
 ## Track coverage
 ${trackCoverage.map((item) => `- ${item.track} (${item.status}): ${item.evidence}`).join("\n")}
 
@@ -1602,6 +1637,25 @@ function App() {
                   </p>
                 </div>
                 <CheckCircle2 size={44} />
+              </section>
+              <section className="judge-lens-panel">
+                <div>
+                  <p className="eyebrow">Solvimon Judge Lens</p>
+                  <h2>Business potential in five proof points.</h2>
+                  <p>
+                    A direct answer to the bounty criteria: demand, monetisation, differentiation,
+                    post-hackathon commitment and a clear demo tone.
+                  </p>
+                </div>
+                <div className="judge-lens-grid">
+                  {solvimonJudgeLens.map((item) => (
+                    <article key={item.label}>
+                      <span>{item.label}</span>
+                      <strong>{item.title}</strong>
+                      <p>{item.detail}</p>
+                    </article>
+                  ))}
+                </div>
               </section>
               <section className="winner-panel">
                 <div>

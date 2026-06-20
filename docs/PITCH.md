@@ -42,6 +42,14 @@ The business wedge is the moment before billing implementation. Founders need co
 - `docs/SOLVIMON_CHECKOUT_GUIDE.md` shows how the handoff can become a Solvimon test checkout page through the Solvimon MCP server.
 - It supports the strategic step before quote-to-cash implementation.
 
+## Solvimon Judge Lens
+
+- Someone wants this: the first validation target is indie AI SaaS founders shipping on Vercel or Stripe who have model/API costs and need pricing before they wire billing.
+- Makes money: start with a free pricing audit, then charge for saved workspaces, report exports, billing templates and Solvimon implementation handoff support.
+- Why Priceplain is different: it is not a billing system or a generic AI prompt; it connects value metrics, usage costs, tiers, overages, margin risk and billing objects.
+- After the hackathon: run customer interviews, build a live Solvimon checkout adapter, add pricing benchmark presets, saved workspaces and collaboration history.
+- Demo tone: be clear about non-goals and show practical evidence instead of overclaiming.
+
 ## Strongest Codeplain Points
 
 - `.plain` specs exist for product flow, pricing engine behaviour, and acceptance tests.

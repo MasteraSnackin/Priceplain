@@ -60,6 +60,10 @@ const checks = [
     contains: [
       "Submission Pack",
       "Preset comparison",
+      "Solvimon Judge Lens",
+      "Business potential in five proof points",
+      "AI app founders before launch",
+      "After the hackathon",
       "Why Priceplain stands out",
       "Live deployment",
       "Download Markdown",

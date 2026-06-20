@@ -668,6 +668,7 @@ textarea:focus-visible {
 .sovereign-hero,
 .sovereign-signal,
 .track-card,
+.judge-lens-panel,
 .submission-card {
   border: 1px solid #dce5df;
   border-radius: 8px;
@@ -1605,6 +1606,62 @@ td {
   border-color: #dce5df;
 }
 
+.judge-lens-panel {
+  background: #ffffff;
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+.judge-lens-panel h2 {
+  font-size: clamp(1.35rem, 2.5vw, 2.05rem);
+  line-height: 1.08;
+  margin-bottom: 8px;
+  max-width: 780px;
+}
+
+.judge-lens-panel > div:first-child p:not(.eyebrow) {
+  color: #40534a;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 850px;
+}
+
+.judge-lens-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.judge-lens-grid article {
+  background: #f8fbf8;
+  border: 1px solid #dce5df;
+  border-left: 4px solid #0f766e;
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+}
+
+.judge-lens-grid span {
+  color: #0f766e;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.judge-lens-grid strong {
+  color: #17211d;
+  line-height: 1.2;
+}
+
+.judge-lens-grid p {
+  color: #53665d;
+  font-size: 0.86rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
 .winner-panel {
   background: #17211d;
   border: 1px solid #17211d;
@@ -1700,6 +1757,7 @@ td {
     .judge-summary-grid,
     .case-points,
     .handoff-flow,
+    .judge-lens-grid,
     .winner-grid,
     .track-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1756,6 +1814,7 @@ td {
     .import-object-grid,
     .handoff-flow,
     .developer-handoff,
+    .judge-lens-grid,
     .winner-grid,
     .track-grid,
     .fit-grid,

@@ -67,6 +67,7 @@ Sources checked on 20 June 2026:
 - Live provider-key status check for Claude and FLock configuration without exposing secrets.
 - Optional Claude refinement through a server-side API route when `ANTHROPIC_API_KEY` is configured.
 - Optional FLock refinement through a server-side API route when `FLOCK_API_KEY` is configured.
+- Solvimon Judge Lens mapping the project to demand, monetisation, differentiation, post-hackathon plan and demo tone.
 - Submission Pack tab with pricing-page preview, “Why Priceplain stands out” close, track coverage, demo script, submission checklist, Markdown download and full report text fallback.
 - Dedicated pitch pack in `docs/PITCH.md`.
 - Consistent API error responses with stable codes and request IDs.
