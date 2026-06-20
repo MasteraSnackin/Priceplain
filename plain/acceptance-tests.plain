@@ -171,6 +171,20 @@ then:
   - Copy report includes pricing, metering, Solvimon import preview, sensitivity checks, provider status, sovereign review, track coverage, demo script, and checklist
   - Download Markdown saves the same report text as a markdown file
 
+scenario: Follow optional Solvimon checkout guide
+given:
+  a founder wants to turn the Priceplain handoff into a test checkout page
+when:
+  the founder reads docs/SOLVIMON_CHECKOUT_GUIDE.md
+then:
+  - the guide explains how to create and activate a Solvimon test sandbox
+  - the guide explains where to create a Solvimon test API key
+  - the guide explains how to configure the Solvimon MCP server
+  - the guide includes a prompt for creating meters, plans and a checkout link
+  - the guide explains where to find the Solvimon checkout pages area
+  - the guide includes test-card details and warns not to use real payment cards
+  - the guide states that Priceplain itself does not process payments
+
 scenario: Check live provider readiness
 given:
   judge asks whether live AI calls are configured

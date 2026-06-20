@@ -39,6 +39,7 @@ The business wedge is the moment before billing implementation. Founders need co
 - It maps value metrics to billing events.
 - It exposes invoice line items, credit policies, free-tier controls, and overages.
 - It shows a developer-friendly billing object before the full import JSON.
+- `docs/SOLVIMON_CHECKOUT_GUIDE.md` shows how the handoff can become a Solvimon test checkout page through the Solvimon MCP server.
 - It supports the strategic step before quote-to-cash implementation.
 
 ## Strongest Codeplain Points
@@ -53,6 +54,8 @@ The business wedge is the moment before billing implementation. Founders need co
 **Is this a real Solvimon integration?**
 
 No. It is a Solvimon-ready planning and import preview, not a live Solvimon API integration. The MVP focuses on the handoff objects that a billing platform would need.
+
+The repo also includes an optional Solvimon checkout guide for creating a test checkout page with the Solvimon MCP server. Only demo that path if the sandbox checkout link has been created and tested.
 
 **Why would founders pay?**
 

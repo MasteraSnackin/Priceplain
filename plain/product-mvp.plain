@@ -35,6 +35,7 @@ core_flow:
   - System exports landing-page pricing copy, sensitivity checks, and a Solvimon-style billing handoff as Markdown
   - System provides a final Submission Pack view with a winning summary, track coverage, demo script, and submission checklist
   - Demo mode hides the intake form and focuses the visible tabs on Pricing, Solvimon Handoff, Revenue Simulation, Startup Case, and Submission Pack
+  - Documentation includes an optional Solvimon checkout guide for creating a hosted test checkout page from the Priceplain handoff using Solvimon MCP
 
 non_goals_for_mvp:
   - No payment collection
@@ -56,6 +57,7 @@ success_criteria:
   - The Startup Case tab explains customer, problem, wedge, revenue path, Solvimon fit, and Codeplain fit
   - The sovereign review tab explains data sovereignty, auditability, vendor lock-in, public-sector suitability, procurement questions, governance actions, and FLock path
   - The Submission Pack tab contains a judge-ready demo script and submission checklist
+  - The Solvimon checkout guide explains sandbox creation, API key creation, MCP setup, checkout link generation and test-card checkout
   - The report can be downloaded as Markdown
   - The demo works without external credentials
   - Provider status clearly distinguishes configured and missing live keys

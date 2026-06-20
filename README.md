@@ -40,6 +40,7 @@ Sources checked on 20 June 2026:
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Screenshots or Demo](#screenshots-or-demo)
+- [Solvimon Checkout Guide](#solvimon-checkout-guide)
 - [API Reference](#api-reference)
 - [Tests](#tests)
 - [Roadmap](#roadmap)
@@ -134,6 +135,7 @@ For the clean judge flow, turn on Demo mode in the top bar. This hides the intak
 Pitch material:
 
 - `docs/PITCH.md` - 30-second pitch, 90-second pitch, demo flow, judge Q&A and overclaiming guardrails.
+- `docs/SOLVIMON_CHECKOUT_GUIDE.md` - optional guide for creating a Solvimon test checkout page from the Priceplain handoff.
 
 Build for production:
 
@@ -190,6 +192,18 @@ Recommended demo flow:
 7. Open Startup Case to explain the Solvimon and Codeplain fit.
 8. Open Submission Pack to show why Priceplain stands out, track coverage and the Markdown report.
 9. Open Sovereign to show the governance review and FLock path if judges ask about secondary tracks.
+
+## Solvimon Checkout Guide
+
+Priceplain does not currently process payments directly. For a live Solvimon test checkout page, use the optional guide in [`docs/SOLVIMON_CHECKOUT_GUIDE.md`](docs/SOLVIMON_CHECKOUT_GUIDE.md).
+
+High-level flow:
+
+1. Create and activate a Solvimon sandbox.
+2. Create a Solvimon test API key.
+3. Install the Solvimon MCP server for Claude Code or Claude Desktop.
+4. Ask the agent to create meters, plans and a checkout link from the Priceplain handoff.
+5. Open the Solvimon checkout page and test it with a test card.
 
 ## API Reference
 
