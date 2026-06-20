@@ -48,7 +48,54 @@ const currencies: Currency[] = ["GBP", "USD", "EUR"];
 const stages: ProductStage[] = ["Prototype", "Beta", "Launched", "Scaling"];
 const motions: BillingMotion[] = ["Self-serve", "Sales-assisted", "Enterprise"];
 const tabs: Tab[] = ["pricing", "business", "sovereign", "simulation", "metering", "export"];
-const demoTabs: Tab[] = ["pricing", "metering", "simulation", "export"];
+const demoTabs: Tab[] = ["pricing", "metering", "simulation", "business", "export"];
+const tabLabels: Record<Tab, string> = {
+  pricing: "Pricing",
+  business: "Startup Case",
+  sovereign: "Sovereign",
+  simulation: "Revenue Simulation",
+  metering: "Solvimon Handoff",
+  export: "Submission Pack",
+};
+const tabProofs: Record<
+  Tab,
+  {
+    proof: string;
+    why: string;
+    sponsor: string;
+  }
+> = {
+  pricing: {
+    proof: "Pricing tiers are tied to unit economics, usage limits and gross-margin checks.",
+    why: "Judges can see this is not a static pricing table; it is a commercial decision tool.",
+    sponsor: "Solvimon fit: hybrid pricing, overages and margin-aware billing assumptions.",
+  },
+  business: {
+    proof: "The target buyer, wedge, revenue path and expansion motion are visible in one view.",
+    why: "Solvimon is rewarding business potential, so the app has to show why someone would pay.",
+    sponsor: "Solvimon and Codeplain fit: business case plus spec-driven build evidence.",
+  },
+  sovereign: {
+    proof: "The app scores governance, auditability and institutional adoption risk.",
+    why: "This keeps FLock as a credible secondary story without diluting the primary Solvimon pitch.",
+    sponsor: "FLock fit: sovereign AI review with optional provider-backed refinement.",
+  },
+  simulation: {
+    proof: "Revenue, COGS, margin and break-even are shown across the first twelve months.",
+    why: "Founders can defend the model under cost shocks, usage spikes and conversion risk.",
+    sponsor: "Solvimon fit: pricing changes are evaluated before billing implementation.",
+  },
+  metering: {
+    proof: "Value metric, meter events, plans, invoice lines and JSON export are connected.",
+    why: "This turns pricing strategy into implementation objects a billing workflow can inspect.",
+    sponsor: "Solvimon fit: usage metering, hybrid plans, credit policies and invoice assumptions.",
+  },
+  export: {
+    proof: "The final view packages demo script, track coverage, report text and deployment evidence.",
+    why: "Judges get a concise close instead of searching through the app for the submission story.",
+    sponsor: "Codeplain fit: public repo, .plain specs, acceptance criteria and working deployment.",
+  },
+};
 const trackCoverage = [
   {
     track: "Solvimon",
@@ -77,8 +124,8 @@ const demoScript = [
   "Open Solvimon Handoff to show the import preview: meters, plans, invoice lines and credit rules.",
   "Open Revenue Simulation to show revenue, COGS, paid conversion and break-even trajectory.",
   "Open Startup Case to explain the customer, wedge, revenue path and Solvimon fit.",
-  "Open Sovereign to show institutional governance, procurement questions and FLock path.",
   "Open Submission Pack and download the Markdown report as the final exportable pricing and governance artefact.",
+  "Open Sovereign only if judges ask about institutional governance and the FLock path.",
 ];
 const submissionChecklist = [
   "Public GitHub repository contains source, README, .plain specs and environment example.",
@@ -306,19 +353,28 @@ function App() {
     () => [
       {
         label: "Value metric",
+        reason: "Names the unit customers understand and the product can defend.",
         value: inputs.valueMetric || "usage",
       },
       {
-        label: "Meters",
+        label: "Meter events",
+        reason: solvimonImportPreview.meters[0]?.event_name ?? "Tracks usage as billing evidence.",
         value: `${solvimonImportPreview.meters.length} events`,
       },
       {
         label: "Plans",
+        reason: "Maps free, starter, growth and scale packages into billing tiers.",
         value: `${solvimonImportPreview.plans.length} tiers`,
       },
       {
         label: "Invoice items",
+        reason: "Separates base fees, included usage, overages and credits.",
         value: `${solvimonImportPreview.invoice_items.length} lines`,
+      },
+      {
+        label: "JSON export",
+        reason: "Gives engineering and billing teams a concrete handoff object.",
+        value: "Copy or download",
       },
     ],
     [inputs.valueMetric, solvimonImportPreview],
@@ -369,7 +425,27 @@ function App() {
     () => demoPresets.find((preset) => preset.inputs.appName === inputs.appName)?.id ?? "custom",
     [inputs.appName],
   );
+  const yearEnd = analysis.simulation[analysis.simulation.length - 1];
+  const maxRevenue = Math.max(...analysis.simulation.map((month) => month.revenue), 1);
   const visibleTabs = demoMode ? demoTabs : tabs;
+  const activeDemoIndex = demoTabs.indexOf(activeTab);
+  const heroMetrics = useMemo(
+    () => [
+      {
+        label: "Recommended model",
+        value: analysis.pricingModel,
+      },
+      {
+        label: "Margin proof",
+        value: `${analysis.auditScore}/100 audit`,
+      },
+      {
+        label: "Month 12 revenue",
+        value: formatCompactCurrency(yearEnd.revenue, inputs.currency),
+      },
+    ],
+    [analysis.auditScore, analysis.pricingModel, inputs.currency, yearEnd.revenue],
+  );
   const reportText = useMemo(
     () =>
       buildReport(
@@ -499,7 +575,9 @@ function App() {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1400);
     } catch {
-      setCopyError("Clipboard access was blocked. The full report text is available in the Export tab.");
+      setCopyError(
+        "Clipboard access was blocked. The full report text is available in the Submission Pack tab.",
+      );
       changeTab("export");
     }
   };
@@ -516,7 +594,7 @@ function App() {
       setJsonCopied(true);
       window.setTimeout(() => setJsonCopied(false), 1400);
     } catch {
-      setCopyError("Clipboard access was blocked. Use Download JSON from the Metering tab.");
+      setCopyError("Clipboard access was blocked. Use Download JSON from the Solvimon Handoff tab.");
     }
   };
 
@@ -556,6 +634,16 @@ function App() {
     }
   };
 
+  const moveDemoStep = (direction: -1 | 1) => {
+    if (activeDemoIndex < 0) {
+      changeTab("pricing");
+      return;
+    }
+
+    const nextIndex = Math.min(Math.max(activeDemoIndex + direction, 0), demoTabs.length - 1);
+    changeTab(demoTabs[nextIndex]);
+  };
+
   const runClaudeReview = async () => {
     setAiLoading(true);
     setAiError("");
@@ -587,9 +675,6 @@ function App() {
       setFlockLoading(false);
     }
   };
-
-  const yearEnd = analysis.simulation[analysis.simulation.length - 1];
-  const maxRevenue = Math.max(...analysis.simulation.map((month) => month.revenue), 1);
 
   return (
     <main className={demoMode ? "app-shell demo-mode" : "app-shell"}>
@@ -861,19 +946,79 @@ function App() {
         </aside>
 
         <section className="output-panel" aria-label="Pricing outputs">
+          <section className="product-hero" aria-label="Judge-ready product summary">
+            <div className="product-hero-copy">
+              <p className="eyebrow">Judge-ready product story</p>
+              <h2>Turn AI app ideas into pricing and Solvimon-ready billing handoff.</h2>
+              <p>
+                Priceplain connects founder assumptions, usage costs, revenue sensitivity and
+                billing implementation evidence in one demoable workflow.
+              </p>
+              <div className="hero-badges" aria-label="Submission strengths">
+                <span>Solvimon-ready</span>
+                <span>Codeplain-spec driven</span>
+                <span>Live Claude optional</span>
+                <span>Deployed on Vercel</span>
+              </div>
+            </div>
+            <div className="hero-metrics">
+              {heroMetrics.map((metric) => (
+                <article key={metric.label}>
+                  <span>{metric.label}</span>
+                  <strong>{metric.value}</strong>
+                </article>
+              ))}
+            </div>
+          </section>
+
           {demoMode && (
             <section className="demo-mode-strip">
               <div>
-                <p className="eyebrow">Judge mode</p>
-                <h2>{inputs.appName}</h2>
+                <p className="eyebrow">Presentation mode</p>
+                <h2>
+                  Step {activeDemoIndex >= 0 ? activeDemoIndex + 1 : 1} of {demoTabs.length}:{" "}
+                  {tabLabels[activeTab]}
+                </h2>
                 <p>
-                  Focused route: pricing tiers, Solvimon handoff, revenue sensitivity and
-                  submission pack.
+                  Follow the strongest judging path: pricing, Solvimon handoff, revenue risk,
+                  startup case and submission pack.
                 </p>
               </div>
-              <button className="ghost-button" onClick={() => toggleDemoMode(false)} type="button">
-                Exit demo mode
-              </button>
+              <div className="demo-actions">
+                <button
+                  className="ghost-button"
+                  disabled={activeDemoIndex <= 0}
+                  onClick={() => moveDemoStep(-1)}
+                  type="button"
+                >
+                  Previous
+                </button>
+                <button
+                  className="primary-button"
+                  disabled={activeDemoIndex >= demoTabs.length - 1}
+                  onClick={() => moveDemoStep(1)}
+                  type="button"
+                >
+                  Next
+                </button>
+                <button className="ghost-button" onClick={() => toggleDemoMode(false)} type="button">
+                  Exit demo mode
+                </button>
+              </div>
+              <div className="demo-rail" aria-label="Presentation steps">
+                {demoTabs.map((tab, index) => (
+                  <button
+                    aria-current={activeTab === tab ? "step" : undefined}
+                    className={activeTab === tab ? "demo-step active" : "demo-step"}
+                    key={tab}
+                    onClick={() => changeTab(tab)}
+                    type="button"
+                  >
+                    <span>{index + 1}</span>
+                    {tabLabels[tab]}
+                  </button>
+                ))}
+              </div>
             </section>
           )}
 
@@ -914,7 +1059,7 @@ function App() {
               <TabButton
                 active={activeTab === "pricing"}
                 icon={<TableProperties size={16} />}
-                label="Pricing"
+                label={tabLabels.pricing}
                 onClick={() => changeTab("pricing")}
               />
             )}
@@ -922,7 +1067,7 @@ function App() {
               <TabButton
                 active={activeTab === "business"}
                 icon={<BriefcaseBusiness size={16} />}
-                label="Startup Case"
+                label={tabLabels.business}
                 onClick={() => changeTab("business")}
               />
             )}
@@ -930,7 +1075,7 @@ function App() {
               <TabButton
                 active={activeTab === "sovereign"}
                 icon={<ShieldCheck size={16} />}
-                label="Sovereign"
+                label={tabLabels.sovereign}
                 onClick={() => changeTab("sovereign")}
               />
             )}
@@ -938,7 +1083,7 @@ function App() {
               <TabButton
                 active={activeTab === "simulation"}
                 icon={<LineChart size={16} />}
-                label="Revenue Simulation"
+                label={tabLabels.simulation}
                 onClick={() => changeTab("simulation")}
               />
             )}
@@ -946,7 +1091,7 @@ function App() {
               <TabButton
                 active={activeTab === "metering"}
                 icon={<Gauge size={16} />}
-                label="Solvimon Handoff"
+                label={tabLabels.metering}
                 onClick={() => changeTab("metering")}
               />
             )}
@@ -954,7 +1099,7 @@ function App() {
               <TabButton
                 active={activeTab === "export"}
                 icon={<FileText size={16} />}
-                label="Submission Pack"
+                label={tabLabels.export}
                 onClick={() => changeTab("export")}
               />
             )}
@@ -962,6 +1107,7 @@ function App() {
 
           {activeTab === "pricing" && (
             <div className="section-stack">
+              <JudgeSummary {...tabProofs.pricing} />
               <div className="model-banner">
                 <span>Recommended model</span>
                 <strong>{analysis.pricingModel}</strong>
@@ -1046,6 +1192,7 @@ function App() {
 
           {activeTab === "business" && (
             <div className="section-stack">
+              <JudgeSummary {...tabProofs.business} />
               <section className="business-hero">
                 <p className="eyebrow">Startup Case</p>
                 <h2>The planning layer before usage-based billing.</h2>
@@ -1155,6 +1302,7 @@ function App() {
 
           {activeTab === "sovereign" && (
             <div className="section-stack">
+              <JudgeSummary {...tabProofs.sovereign} />
               <section className="sovereign-hero">
                 <div>
                   <p className="eyebrow">FLock Sovereign AI</p>
@@ -1256,6 +1404,7 @@ function App() {
 
           {activeTab === "simulation" && (
             <div className="section-stack">
+              <JudgeSummary {...tabProofs.simulation} />
               <div className="chart-panel">
                 {analysis.simulation.map((month) => (
                   <div className="bar-column" key={month.month}>
@@ -1335,6 +1484,7 @@ function App() {
 
           {activeTab === "metering" && (
             <div className="section-stack">
+              <JudgeSummary {...tabProofs.metering} />
               <div className="billing-summary">
                 {analysis.billingSummary.map((line) => (
                   <p key={line}>{line}</p>
@@ -1364,6 +1514,7 @@ function App() {
                       <div>
                         <strong>{item.label}</strong>
                         <small>{item.value}</small>
+                        <p>{item.reason}</p>
                       </div>
                     </article>
                   ))}
@@ -1440,6 +1591,7 @@ function App() {
 
           {activeTab === "export" && (
             <div className="section-stack">
+              <JudgeSummary {...tabProofs.export} />
               <section className="submission-card compact-submission">
                 <div>
                   <p className="eyebrow">Submission Pack</p>
@@ -1450,6 +1602,39 @@ function App() {
                   </p>
                 </div>
                 <CheckCircle2 size={44} />
+              </section>
+              <section className="winner-panel">
+                <div>
+                  <p className="eyebrow">Why Priceplain stands out</p>
+                  <h2>A complete hackathon story: useful product, business logic and working demo.</h2>
+                </div>
+                <div className="winner-grid">
+                  <article>
+                    <span>Problem</span>
+                    <strong>AI pricing is fragile</strong>
+                    <p>Founders need to price variable-cost products before usage gets expensive.</p>
+                  </article>
+                  <article>
+                    <span>Monetisation</span>
+                    <strong>Clear SaaS path</strong>
+                    <p>Self-serve pricing toolkit first, billing migration templates later.</p>
+                  </article>
+                  <article>
+                    <span>Solvimon</span>
+                    <strong>Concrete handoff</strong>
+                    <p>Meters, plans, invoice items, credit policies and export JSON are visible.</p>
+                  </article>
+                  <article>
+                    <span>Codeplain</span>
+                    <strong>Specs included</strong>
+                    <p>Product rules and acceptance criteria are captured in public `.plain` files.</p>
+                  </article>
+                  <article>
+                    <span>Demo</span>
+                    <strong>Live deployment</strong>
+                    <p>The app runs on Vercel with deterministic fallbacks and API status checks.</p>
+                  </article>
+                </div>
               </section>
               <section className="pricing-page-preview">
                 <p className="eyebrow">Generated pricing page</p>
@@ -1602,6 +1787,34 @@ function StatusPill({ configured, label, model }: StatusPillProps) {
 interface InsightListProps {
   title: string;
   items: string[];
+}
+
+interface JudgeSummaryProps {
+  proof: string;
+  why: string;
+  sponsor: string;
+}
+
+function JudgeSummary({ proof, why, sponsor }: JudgeSummaryProps) {
+  return (
+    <section className="judge-summary" aria-label="Judge summary">
+      <p className="eyebrow">Judge Summary</p>
+      <div className="judge-summary-grid">
+        <article>
+          <span>What this proves</span>
+          <p>{proof}</p>
+        </article>
+        <article>
+          <span>Why it matters</span>
+          <p>{why}</p>
+        </article>
+        <article>
+          <span>Sponsor fit</span>
+          <p>{sponsor}</p>
+        </article>
+      </div>
+    </section>
+  );
 }
 
 function InsightList({ title, items }: InsightListProps) {

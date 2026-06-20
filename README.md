@@ -51,12 +51,13 @@ Sources checked on 20 June 2026:
 
 - Founder intake for product, customer, value metric, usage costs and growth assumptions.
 - Four demo presets for meeting notes, coding assistance, media generation and support automation.
-- Judge-friendly demo mode that hides the intake form and keeps the Solvimon demo path focused.
+- Judge-friendly presentation mode that hides the intake form and adds Previous/Next controls across the core demo path.
+- Judge Summary panels on every tab showing what the screen proves, why it matters and sponsor fit.
 - Pricing-to-billing workflow strip showing the path from app description to exportable handoff.
 - Pricing engine for Free, Starter, Growth and Scale tiers.
 - Gross-margin, free-tier exposure, metering clarity and pricing-model audit signals.
 - Usage-metering event suggestions for billing and analytics.
-- Solvimon handoff with `meters`, `plans`, `invoice_items`, credit policies, a compact developer object and copy/download JSON actions.
+- Solvimon handoff pipeline with value metric, meter events, plans, invoice items, JSON export, a compact developer object and copy/download JSON actions.
 - Twelve-month revenue, COGS, paid-customer and margin simulation.
 - Sensitivity checks for model-cost shocks, usage spikes, conversion drops and churn rises.
 - Saved preset comparison for loaded cost, starter pricing, month-12 revenue, margin and audit score.
@@ -65,7 +66,7 @@ Sources checked on 20 June 2026:
 - Live provider-key status check for Claude and FLock configuration without exposing secrets.
 - Optional Claude refinement through a server-side API route when `ANTHROPIC_API_KEY` is configured.
 - Optional FLock refinement through a server-side API route when `FLOCK_API_KEY` is configured.
-- Submission Pack tab with pricing-page preview, track coverage, demo script, submission checklist, Markdown download and full report text fallback.
+- Submission Pack tab with pricing-page preview, “Why Priceplain stands out” close, track coverage, demo script, submission checklist, Markdown download and full report text fallback.
 - Dedicated pitch pack in `docs/PITCH.md`.
 - Consistent API error responses with stable codes and request IDs.
 - Shareable tab URLs for demo sections such as `/?tab=business` and `/?tab=export`.
@@ -128,7 +129,7 @@ Useful demo paths:
 - `/?tab=metering` - Solvimon Handoff with metering events and invoice assumptions.
 - `/?tab=export` - Submission Pack with demo script, track coverage and export view.
 
-For the clean judge flow, turn on Demo mode in the top bar. This hides the intake panel and keeps the visible tabs to Pricing, Solvimon Handoff, Revenue Simulation and Submission Pack.
+For the clean judge flow, turn on Demo mode in the top bar. This hides the intake panel and keeps the visible tabs to Pricing, Solvimon Handoff, Revenue Simulation, Startup Case and Submission Pack.
 
 Pitch material:
 
@@ -176,18 +177,18 @@ Deployed demo: [https://priceplain.vercel.app](https://priceplain.vercel.app)
 
 ![Solvimon handoff preview](docs/assets/priceplain-metering.png)
 
-![Submission pack and preset comparison](docs/assets/priceplain-export.png)
+![Submission pack and winning summary](docs/assets/priceplain-export.png)
 
 Recommended demo flow:
 
 1. Load the default Briefly example on `/`.
 2. Show the generated pricing tiers and audit signals.
 3. Switch presets to show the model adapting across different AI products.
-4. Open Solvimon Handoff to explain billing events, invoice assumptions and the Solvimon import preview.
+4. Open Solvimon Handoff to explain the value metric to meter events to invoice lines pipeline.
 5. Copy or download the Solvimon JSON handoff.
 6. Open Revenue Simulation to show revenue, COGS, gross-margin trajectory and sensitivity checks.
-7. Open Submission Pack to show preset comparison, track coverage and the Markdown report.
-8. Open Startup Case to explain the Solvimon and Codeplain fit if judges ask about commercial framing.
+7. Open Startup Case to explain the Solvimon and Codeplain fit.
+8. Open Submission Pack to show why Priceplain stands out, track coverage and the Markdown report.
 9. Open Sovereign to show the governance review and FLock path if judges ask about secondary tracks.
 
 ## API Reference

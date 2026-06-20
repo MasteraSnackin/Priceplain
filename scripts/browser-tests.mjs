@@ -28,8 +28,11 @@ const checks = [
       "Demo preset",
       "Copy report",
       "Briefly",
+      "Judge-ready product story",
+      "Solvimon-ready billing handoff",
       "Pricing to billing workflow",
       "Design the model before wiring billing",
+      "What this proves",
     ],
   },
   {
@@ -38,6 +41,8 @@ const checks = [
     contains: [
       "Solvimon Handoff",
       "Solvimon import preview",
+      "Meter events",
+      "JSON export",
       "Example billing object",
       "Copy import JSON",
       "Download JSON",
@@ -52,7 +57,14 @@ const checks = [
   {
     name: "export",
     path: "/?tab=export",
-    contains: ["Submission Pack", "Preset comparison", "Download Markdown", "Report text"],
+    contains: [
+      "Submission Pack",
+      "Preset comparison",
+      "Why Priceplain stands out",
+      "Live deployment",
+      "Download Markdown",
+      "Report text",
+    ],
   },
   {
     name: "business",

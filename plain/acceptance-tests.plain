@@ -73,7 +73,8 @@ when:
   the founder turns on Demo mode
 then:
   - the intake form is hidden
-  - the visible tabs are Pricing, Solvimon Handoff, Revenue Simulation, and Submission Pack
+  - the visible tabs are Pricing, Solvimon Handoff, Revenue Simulation, Startup Case, and Submission Pack
+  - Previous and Next controls move through the presentation route
   - the pricing score strip remains visible
   - the founder can exit demo mode without losing the current pricing assumptions
 
@@ -228,8 +229,10 @@ when:
 then:
   - the home route renders the Priceplain shell
   - the Solvimon Handoff route renders the Solvimon import preview
+  - the Solvimon Handoff route renders the value metric, meter events, plans, invoice items and JSON export pipeline
   - the Solvimon Handoff route renders Copy import JSON and Download JSON controls
   - the Revenue Simulation route renders sensitivity checks
   - the Submission Pack route renders preset comparison and Markdown download
+  - the Submission Pack route renders Why Priceplain stands out
   - the Startup Case route renders the tightened pitch
   - the Sovereign route renders the FLock-aligned governance view
