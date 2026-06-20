@@ -46,7 +46,7 @@ Official sponsor and platform documentation has since been checked in `docs/RESE
 - Updated client AI error parsing to handle structured errors.
 - Added visible loading/error states for Claude and FLock review actions.
 - Added clipboard failure handling for report export.
-- Added a full report text fallback in the Export tab for blocked clipboard writes.
+- Added a full report text fallback in the Submission Pack tab for blocked clipboard writes.
 - Updated `.plain` acceptance tests for missing-key error responses.
 - Rewrote `README.md` to the completed README skill structure.
 - Added `ARCHITECTURE.md`.
@@ -100,10 +100,10 @@ Add unit tests for pricing and sovereign review plus browser interaction tests f
 ### What Works
 
 - Primary pricing workflow renders clearly on desktop and mobile.
-- Business, Sovereign, Simulation, Metering and Export tabs are available.
+- Startup Case, Sovereign, Revenue Simulation, Solvimon Handoff and Submission Pack tabs are available.
 - Missing Claude and FLock credentials degrade gracefully.
 - Export copy workflow places the final report on the browser clipboard.
-- Export tab keeps the full report visible if clipboard access is blocked.
+- Submission Pack keeps the full report visible if clipboard access is blocked.
 - Deterministic workflows work without external credentials.
 - Documentation now explains setup, architecture, API routes, env vars and unknowns.
 

@@ -19,18 +19,18 @@ Browser render command: `npm run test:browser`
 - Production build passes.
 - `npm audit --audit-level=moderate` reports no vulnerabilities.
 - Local app returns HTTP 200 on `http://localhost:3002`.
-- Desktop pricing view renders Founder Intake, pricing tiers, audit signals and action buttons.
-- Business, Sovereign, Simulation, Metering and Export tabs render their key content.
-- Metering shows the Solvimon import preview above raw event details, with Copy import JSON and Download JSON actions.
-- README screenshots are present for Pricing, Metering and Export.
+- Desktop pricing view renders Pricing Inputs, pricing tiers, audit signals and action buttons.
+- Startup Case, Sovereign, Revenue Simulation, Solvimon Handoff and Submission Pack tabs render their key content.
+- Solvimon Handoff shows the import preview above raw event details, with Copy import JSON and Download JSON actions.
+- README screenshots are present for Pricing, Solvimon Handoff and Submission Pack.
 - Mobile viewport at 390px renders all main tabs with no horizontal overflow.
 - Claude missing-key path preserves pricing output and shows `CONFIGURATION_ERROR` with a request id.
 - FLock missing-key path preserves the deterministic sovereign review and shows `CONFIGURATION_ERROR` with a request id.
 - API validation errors return stable `VALIDATION_ERROR` codes and request ids.
 - `npm run smoke` checks app shell routes, shareable Business/Sovereign URLs and stable API error envelopes.
-- `npm run test:browser` checks rendered judge routes for Metering, Simulation, Export, Business and Sovereign.
+- `npm run test:browser` checks rendered judge routes for Solvimon Handoff, Revenue Simulation, Submission Pack, Startup Case and Sovereign.
 - Copy report writes the final report to the browser clipboard when permission allows it.
-- Export tab exposes the full report text as a fallback artefact if clipboard access is blocked.
+- Submission Pack exposes the full report text as a fallback artefact if clipboard access is blocked.
 - Browser console showed no captured errors during the audit.
 - Static accessibility probe found 29 form controls, 0 unlabelled controls and 0 textless buttons before the latest JSON export buttons were added.
 

@@ -8,9 +8,9 @@ Project: Priceplain
 
 All nine requested Markdown skill tasks have been re-read, re-applied and verified against the current MVP.
 
-During the deep browser check, one real issue was found and fixed: blocked clipboard writes could expose a raw browser error and left no full report fallback. The app now routes blocked clipboard attempts to Export, shows a safe message, and exposes the full generated report in a labelled read-only textarea.
+During the deep browser check, one real issue was found and fixed: blocked clipboard writes could expose a raw browser error and left no full report fallback. The app now routes blocked clipboard attempts to Submission Pack, shows a safe message, and exposes the full generated report in a labelled read-only textarea.
 
-Follow-up improvements were also completed for the final hackathon demo: demo mode, Solvimon import preview, Solvimon JSON copy/download, provider-key status checks, Markdown download, preset comparison, README screenshots, pitch pack, Vercel build config and browser-render route tests.
+Follow-up improvements were also completed for the final hackathon demo: demo mode, pricing-to-billing workflow, Solvimon Handoff, compact developer billing object, Solvimon JSON copy/download, provider-key status checks, Markdown download, preset comparison, README screenshots, pitch pack, Vercel build config and browser-render route tests.
 
 ## Skill Completion Matrix
 
@@ -52,14 +52,14 @@ Browser checks:
 
 - Desktop `1440x900`: no horizontal overflow, 29 controls, 0 unlabelled controls, 11 buttons, 0 textless buttons.
 - Mobile `390x844`: no horizontal overflow, report textarea remains inside the container, 0 unlabelled controls, 0 textless buttons.
-- Business tab: click changes URL to `/?tab=business`, renders `Submission story` and `Solvimon fit`.
+- Startup Case tab: click changes URL to `/?tab=business`, renders `Startup Case` and `Solvimon fit`.
 - Sovereign tab: click changes URL to `/?tab=sovereign`, renders `FLock Sovereign AI` and `Commercial transparency`.
 - Reload keeps the selected tab.
 - Browser back/forward restores selected tab state.
 - Invalid `?tab=unknown` falls back to Pricing.
 - Claude missing-key path shows `CONFIGURATION_ERROR`, includes a request id, and keeps pricing visible.
 - FLock missing-key path shows `CONFIGURATION_ERROR`, includes a request id, and keeps sovereign review visible.
-- Export tab renders full report text containing pricing, metering, sovereign review and track coverage.
+- Submission Pack tab renders full report text containing pricing, metering, sovereign review and track coverage.
 - Copy report wrote the expected report text to the browser clipboard when permission allowed it.
 - Browser console showed 0 errors and 0 warnings during the final checks.
 

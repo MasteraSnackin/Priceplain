@@ -23,12 +23,26 @@ const checks = [
   {
     name: "home",
     path: "/",
-    contains: ["Priceplain", "Demo preset", "Copy report", "Briefly"],
+    contains: [
+      "Priceplain",
+      "Demo preset",
+      "Copy report",
+      "Briefly",
+      "Pricing to billing workflow",
+      "Design the model before wiring billing",
+    ],
   },
   {
     name: "metering",
     path: "/?tab=metering",
-    contains: ["Solvimon import preview", "Copy import JSON", "Download JSON", "priceplain.solvimon_preview.v1"],
+    contains: [
+      "Solvimon Handoff",
+      "Solvimon import preview",
+      "Example billing object",
+      "Copy import JSON",
+      "Download JSON",
+      "priceplain.solvimon_preview.v1",
+    ],
   },
   {
     name: "simulation",
@@ -38,12 +52,17 @@ const checks = [
   {
     name: "export",
     path: "/?tab=export",
-    contains: ["Preset comparison", "Download Markdown", "Report text"],
+    contains: ["Submission Pack", "Preset comparison", "Download Markdown", "Report text"],
   },
   {
     name: "business",
     path: "/?tab=business",
-    contains: ["The planning layer before usage-based billing.", "Priceplain is the missing planning layer"],
+    contains: [
+      "Startup Case",
+      "The planning layer before usage-based billing.",
+      "Founder pricing decisions happen before billing infrastructure.",
+      "Priceplain is the missing planning layer",
+    ],
   },
   {
     name: "sovereign",

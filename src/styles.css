@@ -380,6 +380,64 @@ textarea:focus-visible {
   margin: 0;
 }
 
+.workflow-strip {
+  align-items: stretch;
+  background: #f8fbf8;
+  border: 1px solid #dce5df;
+  border-radius: 8px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(210px, 0.75fr) minmax(0, 1.25fr);
+  margin-bottom: 14px;
+  padding: 16px;
+}
+
+.workflow-strip h2 {
+  font-size: 1.18rem;
+  margin: 0;
+}
+
+.workflow-steps {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.workflow-step {
+  background: #ffffff;
+  border: 1px solid #dce5df;
+  border-radius: 8px;
+  display: grid;
+  gap: 6px;
+  min-height: 112px;
+  padding: 12px;
+}
+
+.workflow-step span {
+  align-items: center;
+  background: #17211d;
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 900;
+  height: 26px;
+  justify-content: center;
+  width: 26px;
+}
+
+.workflow-step strong {
+  color: #17211d;
+  font-size: 0.95rem;
+}
+
+.workflow-step small {
+  color: #5f6f68;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
 .metric-card {
   background: #f7faf7;
   border: 1px solid #dce5df;
@@ -458,6 +516,9 @@ textarea:focus-visible {
 .comparison-panel,
 .sensitivity-panel,
 .sensitivity-card,
+.workflow-strip,
+.business-case-panel,
+.developer-handoff,
 .business-hero,
 .business-grid article,
 .fit-card,
@@ -741,6 +802,59 @@ li::before {
   margin: 0;
 }
 
+.business-case-panel {
+  background: #f8fbf8;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+  padding: 18px;
+}
+
+.business-case-panel h2 {
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+  line-height: 1.08;
+  margin-bottom: 10px;
+}
+
+.business-case-panel p {
+  color: #40534a;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.case-points {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.case-points article {
+  background: #ffffff;
+  border: 1px solid #dce5df;
+  border-radius: 8px;
+  display: grid;
+  gap: 7px;
+  padding: 12px;
+}
+
+.case-points span {
+  color: #0f766e;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.case-points strong {
+  color: #17211d;
+  line-height: 1.2;
+}
+
+.case-points p {
+  color: #53665d;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
 .fit-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -1020,6 +1134,79 @@ td {
   overflow-wrap: anywhere;
 }
 
+.handoff-flow {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.handoff-step {
+  align-items: center;
+  background: #f8fbf8;
+  border: 1px solid #dce5df;
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  min-height: 76px;
+  padding: 11px;
+}
+
+.handoff-step span {
+  align-items: center;
+  background: #ecfeff;
+  border: 1px solid #99f6e4;
+  border-radius: 999px;
+  color: #0f766e;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  font-weight: 900;
+  height: 28px;
+  justify-content: center;
+  width: 28px;
+}
+
+.handoff-step div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.handoff-step strong {
+  color: #17211d;
+  font-size: 0.9rem;
+}
+
+.handoff-step small {
+  color: #5f6f68;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.developer-handoff {
+  align-items: start;
+  background: #f8fbf8;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  padding: 14px;
+}
+
+.developer-handoff h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.developer-handoff p:not(.eyebrow) {
+  color: #53665d;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.compact-json {
+  max-height: 260px;
+}
+
 .sensitivity-grid {
   display: grid;
   gap: 12px;
@@ -1229,6 +1416,11 @@ td {
   flex: 0 0 auto;
 }
 
+.compact-submission {
+  background: #f8fbf8;
+  border-color: #dce5df;
+}
+
 .report-card {
   background: #ffffff;
   display: grid;
@@ -1261,10 +1453,13 @@ td {
   .tier-grid,
   .audit-grid,
   .business-grid,
-  .sovereign-grid,
-  .sensitivity-grid,
-  .import-object-grid,
-  .track-grid {
+    .sovereign-grid,
+    .sensitivity-grid,
+    .import-object-grid,
+    .workflow-steps,
+    .case-points,
+    .handoff-flow,
+    .track-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1290,13 +1485,19 @@ td {
   .field-grid,
   .metric-inputs,
     .score-strip,
+    .workflow-strip,
+    .workflow-steps,
     .tier-grid,
     .audit-grid,
     .claude-grid,
     .business-grid,
+    .business-case-panel,
+    .case-points,
     .sovereign-grid,
     .sensitivity-grid,
     .import-object-grid,
+    .handoff-flow,
+    .developer-handoff,
     .track-grid,
     .fit-grid,
     .event-list,

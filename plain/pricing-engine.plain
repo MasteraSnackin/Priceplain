@@ -45,6 +45,7 @@ outputs:
         - plans
         - invoice_items
         - credit_policies
+        - compact developer billing object
         - implementation notes
       actions:
         - copy import JSON

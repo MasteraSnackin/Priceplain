@@ -52,22 +52,25 @@ Sources checked on 20 June 2026:
 - Founder intake for product, customer, value metric, usage costs and growth assumptions.
 - Four demo presets for meeting notes, coding assistance, media generation and support automation.
 - Judge-friendly demo mode that hides the intake form and keeps the Solvimon demo path focused.
+- Pricing-to-billing workflow strip showing the path from app description to exportable handoff.
 - Pricing engine for Free, Starter, Growth and Scale tiers.
 - Gross-margin, free-tier exposure, metering clarity and pricing-model audit signals.
 - Usage-metering event suggestions for billing and analytics.
-- Solvimon import preview with `meters`, `plans`, `invoice_items`, credit policies and copy/download JSON actions.
+- Solvimon handoff with `meters`, `plans`, `invoice_items`, credit policies, a compact developer object and copy/download JSON actions.
 - Twelve-month revenue, COGS, paid-customer and margin simulation.
 - Sensitivity checks for model-cost shocks, usage spikes, conversion drops and churn rises.
 - Saved preset comparison for loaded cost, starter pricing, month-12 revenue, margin and audit score.
-- Business tab explaining customer, problem, wedge, revenue path and sponsor fit.
+- Startup Case tab explaining customer, problem, wedge, revenue path and sponsor fit.
 - Sovereign AI Review for institutional governance, auditability, vendor lock-in and public-sector suitability.
 - Live provider-key status check for Claude and FLock configuration without exposing secrets.
 - Optional Claude refinement through a server-side API route when `ANTHROPIC_API_KEY` is configured.
 - Optional FLock refinement through a server-side API route when `FLOCK_API_KEY` is configured.
-- Export tab with pricing-page preview, track coverage, demo script, submission checklist, Markdown download and full report text fallback.
+- Submission Pack tab with pricing-page preview, track coverage, demo script, submission checklist, Markdown download and full report text fallback.
 - Dedicated pitch pack in `docs/PITCH.md`.
 - Consistent API error responses with stable codes and request IDs.
 - Shareable tab URLs for demo sections such as `/?tab=business` and `/?tab=export`.
+
+Design and product framing are adapted from usage-based billing patterns in [Orb](https://www.withorb.com/), [Metronome](https://metronome.com/) and [OpenMeter](https://openmeter.io/): revenue-design framing, role-based monetisation language, and developer-friendly metering objects. No vendor branding, copy or protected layout has been reused.
 
 ## Tech Stack
 
@@ -119,13 +122,13 @@ npm run dev
 Useful demo paths:
 
 - `/` - pricing workspace.
-- `/?tab=business` - Solvimon and Codeplain pitch.
+- `/?tab=business` - Startup Case for Solvimon and Codeplain.
 - `/?tab=sovereign` - FLock-aligned Sovereign AI Review.
-- `/?tab=simulation` - revenue and margin simulation.
-- `/?tab=metering` - metering events and invoice assumptions.
-- `/?tab=export` - demo script, track coverage and export view.
+- `/?tab=simulation` - Revenue Simulation for revenue and margin assumptions.
+- `/?tab=metering` - Solvimon Handoff with metering events and invoice assumptions.
+- `/?tab=export` - Submission Pack with demo script, track coverage and export view.
 
-For the clean judge flow, turn on Demo mode in the top bar. This hides the intake panel and keeps the visible tabs to Pricing, Metering, Simulation and Export.
+For the clean judge flow, turn on Demo mode in the top bar. This hides the intake panel and keeps the visible tabs to Pricing, Solvimon Handoff, Revenue Simulation and Submission Pack.
 
 Pitch material:
 
@@ -171,20 +174,20 @@ No deployed URL is recorded in this repository yet.
 
 ![Priceplain pricing workspace](docs/assets/priceplain-pricing.png)
 
-![Solvimon import preview](docs/assets/priceplain-metering.png)
+![Solvimon handoff preview](docs/assets/priceplain-metering.png)
 
-![Export and preset comparison](docs/assets/priceplain-export.png)
+![Submission pack and preset comparison](docs/assets/priceplain-export.png)
 
 Recommended demo flow:
 
 1. Load the default Briefly example on `/`.
 2. Show the generated pricing tiers and audit signals.
 3. Switch presets to show the model adapting across different AI products.
-4. Open Metering to explain billing events, invoice assumptions and the Solvimon import preview.
+4. Open Solvimon Handoff to explain billing events, invoice assumptions and the Solvimon import preview.
 5. Copy or download the Solvimon JSON handoff.
-6. Open Simulation to show revenue, COGS, gross-margin trajectory and sensitivity checks.
-7. Open Export to show preset comparison, track coverage and the Markdown report.
-8. Open Business to explain the Solvimon and Codeplain fit if judges ask about commercial framing.
+6. Open Revenue Simulation to show revenue, COGS, gross-margin trajectory and sensitivity checks.
+7. Open Submission Pack to show preset comparison, track coverage and the Markdown report.
+8. Open Startup Case to explain the Solvimon and Codeplain fit if judges ask about commercial framing.
 9. Open Sovereign to show the governance review and FLock path if judges ask about secondary tracks.
 
 ## API Reference
@@ -280,7 +283,7 @@ npm run smoke
 
 `npm run smoke` expects the local dev server to be running and defaults to `http://localhost:3001`. Override with `SMOKE_BASE_URL` if the app is on another port. The smoke suite checks the app shell, shareable demo URLs, and stable API error envelopes without calling live AI providers.
 
-`npm run test:browser` expects a local dev server and a Chrome or Chromium binary. Override with `BROWSER_BASE_URL` or `CHROME_BIN` if needed. It verifies rendered judge routes for Pricing, Metering, Simulation, Export, Business and Sovereign views.
+`npm run test:browser` expects a local dev server and a Chrome or Chromium binary. Override with `BROWSER_BASE_URL` or `CHROME_BIN` if needed. It verifies rendered judge routes for Pricing, Solvimon Handoff, Revenue Simulation, Submission Pack, Startup Case and Sovereign views.
 
 There is no lint script or full browser-click regression suite yet. Behavioural acceptance criteria are documented in `plain/acceptance-tests.plain`.
 

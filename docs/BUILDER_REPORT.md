@@ -7,7 +7,7 @@ Scope: Priceplain application state, demo navigation and functional verification
 
 The output tabs are now URL-backed:
 
-- Clicking `Business`, `Sovereign`, `Simulation`, `Metering` or `Export` updates the browser URL with `?tab=<name>`.
+- Clicking `Startup Case`, `Sovereign`, `Revenue Simulation`, `Solvimon Handoff` or `Submission Pack` updates the browser URL with the matching `?tab=<name>` route.
 - Clicking `Pricing` removes the `tab` query parameter.
 - Reloading a tab URL restores the matching selected tab.
 - Browser back and forward restore the selected tab state through `popstate`.
@@ -15,14 +15,14 @@ The output tabs are now URL-backed:
 
 This makes the demo sections shareable and recoverable during judging.
 
-The Export tab now also includes a full read-only report text fallback. If clipboard writing is blocked, the app routes to Export and shows a safe message instead of a raw browser error.
+The Submission Pack tab now also includes a full read-only report text fallback. If clipboard writing is blocked, the app routes to Submission Pack and shows a safe message instead of a raw browser error.
 
 Follow-up builder improvements added after the first pass:
 
 - Demo mode hides the intake form for a cleaner judge flow.
-- Metering shows a Solvimon import preview with `meters`, `plans`, `invoice_items`, `credit_policies`, object counts and JSON handoff.
+- Solvimon Handoff shows a preview with `meters`, `plans`, `invoice_items`, `credit_policies`, object counts, compact developer object and JSON handoff.
 - The Solvimon JSON handoff can be copied or downloaded.
-- Export includes preset comparison and Markdown download.
+- Submission Pack includes preset comparison and Markdown download.
 - Provider status reports whether Claude and FLock keys are configured without exposing secrets.
 - README screenshots and `docs/PITCH.md` were added for judging and GitHub review.
 - `npm run test:browser` checks rendered judge routes in headless Chrome.
@@ -51,17 +51,17 @@ Follow-up builder improvements added after the first pass:
 - `npm run test:browser` passed.
 - `npm run smoke` passed.
 - Browser check on `http://localhost:3002`:
-  - Clicking `Business` changed the URL to `/?tab=business` and selected `Business`.
+  - Clicking `Startup Case` changed the URL to `/?tab=business` and selected `Startup Case`.
   - Reloading `/?tab=business` kept `Business` selected.
   - Clicking `Sovereign` changed the URL to `/?tab=sovereign` and selected `Sovereign`.
-  - Browser back restored `/?tab=business` and selected `Business`.
+  - Browser back restored `/?tab=business` and selected `Startup Case`.
   - Browser forward restored `/?tab=sovereign` and selected `Sovereign`.
   - `/?tab=unknown` selected `Pricing`.
   - No browser console errors were captured.
 - Routed content check:
-  - `/?tab=business` renders `Submission story` and `Solvimon fit`.
+  - `/?tab=business` renders `Startup Case` and `Solvimon fit`.
   - `/?tab=sovereign` renders `FLock Sovereign AI` and `Commercial transparency`.
-  - `/?tab=metering` renders `Solvimon import preview`, `Copy import JSON` and `Download JSON`.
+  - `/?tab=metering` renders `Solvimon import preview`, `Example billing object`, `Copy import JSON` and `Download JSON`.
   - `/?tab=export` renders full report text with pricing, metering, sovereign review and track coverage.
 
 ## Known Limitations

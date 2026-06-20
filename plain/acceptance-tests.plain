@@ -59,9 +59,10 @@ then:
   - the summary names usage-based pricing
   - the summary names hybrid pricing when seats and usage both matter
   - the summary lists billing events and invoice line items
-  - the metering tab shows a Solvimon import preview
+  - the Solvimon Handoff tab shows a Solvimon import preview
   - the preview shows meter count, plan count, invoice line count, and credit policy count
   - the preview JSON contains meters, plans, invoice_items, credit_policies, and implementation_notes
+  - the handoff shows a compact developer billing object before the full JSON
   - Copy import JSON copies the same JSON payload shown in the preview
   - Download JSON saves the same JSON payload shown in the preview
 
@@ -72,7 +73,7 @@ when:
   the founder turns on Demo mode
 then:
   - the intake form is hidden
-  - the visible tabs are Pricing, Metering, Simulation, and Export
+  - the visible tabs are Pricing, Solvimon Handoff, Revenue Simulation, and Submission Pack
   - the pricing score strip remains visible
   - the founder can exit demo mode without losing the current pricing assumptions
 
@@ -111,7 +112,7 @@ then:
 
 scenario: Explain business potential
 given:
-  judge opens the Business tab
+  judge opens the Startup Case tab
 when:
   Priceplain renders the submission story
 then:
@@ -156,7 +157,7 @@ then:
 
 scenario: Export final submission artefact
 given:
-  judge opens the Export tab
+  judge opens the Submission Pack tab
 when:
   Priceplain renders the final export view
 then:
@@ -185,7 +186,7 @@ scenario: Shareable demo sections
 given:
   judge is viewing the default Pricing tab
 when:
-  judge opens Business, Sovereign, Simulation, Metering, or Export
+  judge opens Startup Case, Sovereign, Revenue Simulation, Solvimon Handoff, or Submission Pack
 then:
   - the browser URL updates with the selected tab
   - reloading the URL opens the same selected tab
@@ -226,9 +227,9 @@ when:
   the builder runs npm run test:browser
 then:
   - the home route renders the Priceplain shell
-  - the Metering route renders the Solvimon import preview
-  - the Metering route renders Copy import JSON and Download JSON controls
-  - the Simulation route renders sensitivity checks
-  - the Export route renders preset comparison and Markdown download
-  - the Business route renders the tightened pitch
+  - the Solvimon Handoff route renders the Solvimon import preview
+  - the Solvimon Handoff route renders Copy import JSON and Download JSON controls
+  - the Revenue Simulation route renders sensitivity checks
+  - the Submission Pack route renders preset comparison and Markdown download
+  - the Startup Case route renders the tightened pitch
   - the Sovereign route renders the FLock-aligned governance view

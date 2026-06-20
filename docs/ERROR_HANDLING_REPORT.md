@@ -40,7 +40,7 @@ Run date: 20 June 2026
 - Added user-facing timeout messages that preserve deterministic fallback workflows.
 - Updated `ARCHITECTURE.md` and `README.md` so timeout status and remaining gaps are accurate.
 - Added `npm run smoke` coverage for method, validation and invalid-JSON error envelopes.
-- Added a safe clipboard-denied message and full report text fallback in the Export tab.
+- Added a safe clipboard-denied message and full report text fallback in the Submission Pack tab.
 
 ## Verification
 

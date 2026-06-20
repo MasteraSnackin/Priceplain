@@ -5,7 +5,7 @@ Scope: Priceplain frontend layout, visual hierarchy, responsive behaviour and st
 
 ## Design Diagnosis
 
-The primary workflow is clear: the user sees `Priceplain`, action buttons, `Founder Intake`, cost metrics, pricing tabs and generated tiers without needing to hunt for the main task.
+The primary workflow is clear: the user sees `Priceplain`, action buttons, `Pricing Inputs`, cost metrics, the pricing-to-billing workflow and generated tiers without needing to hunt for the main task.
 
 The main design issue found was in the desktop intake panel. Numeric assumption fields used a three-column grid inside a narrow fixed panel, which caused long labels such as `Units/customer/month` and `Fixed cost/month` to crowd into each other. This reduced scanability in the highest-use part of the product.
 
@@ -13,7 +13,7 @@ The main design issue found was in the desktop intake panel. Numeric assumption 
 
 - Change the numeric assumption grid from three columns to two columns in the intake panel.
 - Add explicit `:focus-visible` styling for buttons and form controls.
-- Add a readable report text fallback to the Export tab so the final artefact remains available when clipboard access is blocked.
+- Add a readable report text fallback to the Submission Pack tab so the final artefact remains available when clipboard access is blocked.
 - Preserve the existing visual system, spacing, cards, colours and information architecture.
 
 ## Files Affected
@@ -24,7 +24,7 @@ The main design issue found was in the desktop intake panel. Numeric assumption 
 
 - `.metric-inputs` now uses two equal columns by default.
 - Buttons, inputs, selects and textareas now receive a teal focus-visible ring and border state.
-- Export now includes a labelled, read-only report textarea.
+- Submission Pack now includes a labelled, read-only report textarea.
 
 ## Before Verification
 
@@ -45,7 +45,7 @@ The main design issue found was in the desktop intake panel. Numeric assumption 
   - Primary intake workflow remains visible.
   - No horizontal overflow.
   - Unlabelled control count is `0`.
-- Export fallback recheck:
+- Submission Pack fallback recheck:
   - Desktop 1440px and mobile 390px both have no horizontal overflow.
   - Report textarea is labelled and stays within its container.
 

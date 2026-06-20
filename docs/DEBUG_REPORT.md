@@ -11,7 +11,7 @@ The provider and API fallback paths still behaved correctly: validation errors a
 
 ## Fix
 
-Added a reusable generated report value, changed clipboard failure copy to a safe user-facing message, routed blocked clipboard attempts to the Export tab, and added a read-only `Generated report text` textarea containing the full report.
+Added a reusable generated report value, changed clipboard failure copy to a safe user-facing message, routed blocked clipboard attempts to the Submission Pack tab, and added a read-only `Generated report text` textarea containing the full report.
 
 ## Verification
 
@@ -19,8 +19,8 @@ Added a reusable generated report value, changed clipboard failure copy to a saf
 - Result: passed with TypeScript and Vite production build complete.
 - Command: `npm run smoke`
 - Result: passed against `http://localhost:3001`.
-- Browser check: default Priceplain page rendered `Founder Intake`, pricing tiers, `Claude refine`, `Copy report` and `Export`; no horizontal overflow; no captured console errors.
-- Browser check: Export tab includes full read-only report text with pricing, metering, sovereign review and track coverage.
+- Browser check: default Priceplain page rendered `Pricing Inputs`, pricing tiers, `Claude refine`, `Copy report` and `Submission Pack`; no horizontal overflow; no captured console errors.
+- Browser check: Submission Pack tab includes full read-only report text with pricing, metering, sovereign review and track coverage.
 - Browser check: Copy report wrote expected report text to the browser clipboard when permission allowed it; raw browser clipboard errors were not visible after the fix.
 - Local server: `curl -I http://localhost:3001` returned HTTP 200.
 - API validation: `POST /api/priceplan` with `{}` returned `VALIDATION_ERROR` and a request id.

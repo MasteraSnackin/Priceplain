@@ -74,11 +74,11 @@ const trackCoverage = [
 const demoScript = [
   "Start with the Briefly demo app and show the value metric plus AI cost drivers.",
   "Open Pricing to show generated tiers, overage rules and gross-margin visibility.",
-  "Open Metering to show the Solvimon import preview: meters, plans, invoice lines and credit rules.",
-  "Open Simulation to show revenue, COGS, paid conversion and break-even trajectory.",
-  "Open Business to explain the customer, wedge, revenue path and Solvimon fit.",
+  "Open Solvimon Handoff to show the import preview: meters, plans, invoice lines and credit rules.",
+  "Open Revenue Simulation to show revenue, COGS, paid conversion and break-even trajectory.",
+  "Open Startup Case to explain the customer, wedge, revenue path and Solvimon fit.",
   "Open Sovereign to show institutional governance, procurement questions and FLock path.",
-  "Download the Markdown report as the final exportable pricing and governance artefact.",
+  "Open Submission Pack and download the Markdown report as the final exportable pricing and governance artefact.",
 ];
 const submissionChecklist = [
   "Public GitHub repository contains source, README, .plain specs and environment example.",
@@ -281,6 +281,70 @@ function App() {
     [solvimonImportPreview],
   );
   const sensitivityScenarios = useMemo(() => buildSensitivityScenarios(inputs), [inputs]);
+  const workflowSteps = useMemo(
+    () => [
+      {
+        detail: inputs.valueMetric || "value metric",
+        label: "Describe app",
+      },
+      {
+        detail: analysis.pricingModel,
+        label: "Model pricing",
+      },
+      {
+        detail: `${solvimonImportPreview.meters.length} meters`,
+        label: "Meter usage",
+      },
+      {
+        detail: `${solvimonImportPreview.invoice_items.length} invoice lines`,
+        label: "Export handoff",
+      },
+    ],
+    [analysis.pricingModel, inputs.valueMetric, solvimonImportPreview],
+  );
+  const handoffFlow = useMemo(
+    () => [
+      {
+        label: "Value metric",
+        value: inputs.valueMetric || "usage",
+      },
+      {
+        label: "Meters",
+        value: `${solvimonImportPreview.meters.length} events`,
+      },
+      {
+        label: "Plans",
+        value: `${solvimonImportPreview.plans.length} tiers`,
+      },
+      {
+        label: "Invoice items",
+        value: `${solvimonImportPreview.invoice_items.length} lines`,
+      },
+    ],
+    [inputs.valueMetric, solvimonImportPreview],
+  );
+  const developerHandoffExample = useMemo(() => {
+    const plan =
+      solvimonImportPreview.plans.find((item) => item.plan_id === "growth") ??
+      solvimonImportPreview.plans.find((item) => item.base_monthly_price > 0) ??
+      solvimonImportPreview.plans[0];
+    const invoiceItem =
+      solvimonImportPreview.invoice_items.find((item) => item.code.endsWith("_usage_overage")) ??
+      solvimonImportPreview.invoice_items[0];
+
+    return {
+      meter: solvimonImportPreview.meters[0]?.code ?? "",
+      plan: plan?.plan_id ?? "",
+      included_units: plan?.included_units ?? 0,
+      overage_rate: plan?.overage_rate ?? 0,
+      invoice_item: invoiceItem?.code ?? "",
+      event_properties: solvimonImportPreview.meters[0]?.properties ?? [],
+    };
+  }, [solvimonImportPreview]);
+  const developerHandoffJson = useMemo(
+    () => JSON.stringify(developerHandoffExample, null, 2),
+    [developerHandoffExample],
+  );
   const presetComparisons = useMemo(
     () =>
       demoPresets.map((preset) => {
@@ -616,7 +680,7 @@ function App() {
         <aside className="input-panel" aria-label="Pricing inputs">
           <div className="panel-heading">
             <Calculator size={18} />
-            <h2>Founder Intake</h2>
+            <h2>Pricing Inputs</h2>
           </div>
 
           <div className="field-grid">
@@ -803,8 +867,8 @@ function App() {
                 <p className="eyebrow">Judge mode</p>
                 <h2>{inputs.appName}</h2>
                 <p>
-                  Focused route: pricing tiers, Solvimon import preview, revenue sensitivity and
-                  Markdown export.
+                  Focused route: pricing tiers, Solvimon handoff, revenue sensitivity and
+                  submission pack.
                 </p>
               </div>
               <button className="ghost-button" onClick={() => toggleDemoMode(false)} type="button">
@@ -812,6 +876,22 @@ function App() {
               </button>
             </section>
           )}
+
+          <section className="workflow-strip" aria-label="Pricing to billing workflow">
+            <div>
+              <p className="eyebrow">Pricing to billing workflow</p>
+              <h2>Design the model before wiring billing</h2>
+            </div>
+            <div className="workflow-steps">
+              {workflowSteps.map((step, index) => (
+                <article className="workflow-step" key={step.label}>
+                  <span>{index + 1}</span>
+                  <strong>{step.label}</strong>
+                  <small>{step.detail}</small>
+                </article>
+              ))}
+            </div>
+          </section>
 
           <div className="score-strip">
             <MetricCard
@@ -842,7 +922,7 @@ function App() {
               <TabButton
                 active={activeTab === "business"}
                 icon={<BriefcaseBusiness size={16} />}
-                label="Business"
+                label="Startup Case"
                 onClick={() => changeTab("business")}
               />
             )}
@@ -858,7 +938,7 @@ function App() {
               <TabButton
                 active={activeTab === "simulation"}
                 icon={<LineChart size={16} />}
-                label="Simulation"
+                label="Revenue Simulation"
                 onClick={() => changeTab("simulation")}
               />
             )}
@@ -866,7 +946,7 @@ function App() {
               <TabButton
                 active={activeTab === "metering"}
                 icon={<Gauge size={16} />}
-                label="Metering"
+                label="Solvimon Handoff"
                 onClick={() => changeTab("metering")}
               />
             )}
@@ -874,7 +954,7 @@ function App() {
               <TabButton
                 active={activeTab === "export"}
                 icon={<FileText size={16} />}
-                label="Export"
+                label="Submission Pack"
                 onClick={() => changeTab("export")}
               />
             )}
@@ -967,7 +1047,7 @@ function App() {
           {activeTab === "business" && (
             <div className="section-stack">
               <section className="business-hero">
-                <p className="eyebrow">Submission story</p>
+                <p className="eyebrow">Startup Case</p>
                 <h2>The planning layer before usage-based billing.</h2>
                 <p>
                   Priceplain turns a vibe-coded AI app into pricing tiers, metering assumptions,
@@ -1009,6 +1089,35 @@ function App() {
                   </p>
                 </article>
               </div>
+
+              <section className="business-case-panel">
+                <div>
+                  <p className="eyebrow">Why it can become a business</p>
+                  <h2>Founder pricing decisions happen before billing infrastructure.</h2>
+                  <p>
+                    The strongest wedge is the moment between prototype and launch, when AI founders
+                    need a credible pricing model, a usage metric and margin evidence before they
+                    choose a billing stack.
+                  </p>
+                </div>
+                <div className="case-points">
+                  <article>
+                    <span>Trigger</span>
+                    <strong>AI costs are variable</strong>
+                    <p>Every new model, workflow or media step changes margin assumptions.</p>
+                  </article>
+                  <article>
+                    <span>Buyer</span>
+                    <strong>Founder or product lead</strong>
+                    <p>They need pricing logic that is clear enough for engineering and sales.</p>
+                  </article>
+                  <article>
+                    <span>Expansion</span>
+                    <strong>Billing migration templates</strong>
+                    <p>The same model can become implementation specs for Solvimon-style billing.</p>
+                  </article>
+                </div>
+              </section>
 
               <div className="fit-grid">
                 <article className="fit-card">
@@ -1248,6 +1357,17 @@ function App() {
                     </button>
                   </div>
                 </div>
+                <div className="handoff-flow" aria-label="Implementation flow">
+                  {handoffFlow.map((item, index) => (
+                    <article className="handoff-step" key={item.label}>
+                      <span>{index + 1}</span>
+                      <div>
+                        <strong>{item.label}</strong>
+                        <small>{item.value}</small>
+                      </div>
+                    </article>
+                  ))}
+                </div>
                 <div className="import-object-grid">
                   <article>
                     <span>Meters</span>
@@ -1288,6 +1408,17 @@ function App() {
                     </tbody>
                   </table>
                 </div>
+                <section className="developer-handoff">
+                  <div>
+                    <p className="eyebrow">Developer handoff</p>
+                    <h3>Example billing object</h3>
+                    <p>
+                      Compact implementation shape for the first billing pass. The full JSON below
+                      remains the source of truth for meters, plans, credit rules and invoice lines.
+                    </p>
+                  </div>
+                  <pre className="json-block compact-json">{developerHandoffJson}</pre>
+                </section>
                 <pre className="json-block">{solvimonImportJson}</pre>
               </section>
               <div className="event-list">
@@ -1309,6 +1440,17 @@ function App() {
 
           {activeTab === "export" && (
             <div className="section-stack">
+              <section className="submission-card compact-submission">
+                <div>
+                  <p className="eyebrow">Submission Pack</p>
+                  <h2>One page for the judges, repo, report and demo proof.</h2>
+                  <p>
+                    This view packages the pricing page preview, scenario comparison, track coverage
+                    and downloadable report so the product story is easy to inspect.
+                  </p>
+                </div>
+                <CheckCircle2 size={44} />
+              </section>
               <section className="pricing-page-preview">
                 <p className="eyebrow">Generated pricing page</p>
                 <h2>{analysis.pricingPage.headline}</h2>

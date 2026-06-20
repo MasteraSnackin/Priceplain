@@ -24,12 +24,13 @@ The business wedge is the moment before billing implementation. Founders need co
 
 1. Start on Pricing with the Briefly preset.
 2. Show loaded cost, overage rate, audit score, and month-12 revenue.
-3. Open Metering and show the Solvimon import preview.
-4. Copy or download the Solvimon JSON handoff.
-5. Open Simulation and show model-cost shock and usage-spike sensitivity.
-6. Open Export and show preset comparison plus Markdown download.
-7. Use Business only if judges ask about commercial potential.
-8. Use Sovereign only if judges ask about the FLock secondary track.
+3. Point to the workflow strip: describe app, model pricing, meter usage, export handoff.
+4. Open Solvimon Handoff and show the Solvimon import preview plus the compact developer object.
+5. Copy or download the Solvimon JSON handoff.
+6. Open Revenue Simulation and show model-cost shock and usage-spike sensitivity.
+7. Open Submission Pack and show preset comparison plus Markdown download.
+8. Use Startup Case only if judges ask about commercial potential.
+9. Use Sovereign only if judges ask about the FLock secondary track.
 
 ## Strongest Solvimon Points
 
@@ -37,6 +38,7 @@ The business wedge is the moment before billing implementation. Founders need co
 - It produces usage-based and hybrid pricing assumptions, not just a static pricing table.
 - It maps value metrics to billing events.
 - It exposes invoice line items, credit policies, free-tier controls, and overages.
+- It shows a developer-friendly billing object before the full import JSON.
 - It supports the strategic step before quote-to-cash implementation.
 
 ## Strongest Codeplain Points

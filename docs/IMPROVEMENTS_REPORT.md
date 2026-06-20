@@ -43,7 +43,7 @@ Implemented the highest-value improvements that do not depend on unconfirmed spo
   - usage spike,
   - conversion drop,
   - churn rise.
-- Added demo mode to hide the intake panel and focus the live presentation on Pricing, Metering, Simulation and Export.
+- Added demo mode to hide the intake panel and focus the live presentation on Pricing, Solvimon Handoff, Revenue Simulation and Submission Pack.
 - Added `/api/provider-status` to report whether Claude and FLock keys are configured without exposing secrets or calling providers.
 - Added a one-click Markdown report download.
 - Added a dedicated pitch pack in `docs/PITCH.md`.
