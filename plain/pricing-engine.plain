@@ -1,0 +1,101 @@
+feature: Usage-aware pricing engine
+
+inputs:
+  app_name: string
+  product_summary: string
+  target_customer: string
+  value_metric: string
+  monthly_value_units_per_customer: number
+  active_customers: number
+  fixed_monthly_cost: number
+  gross_margin_target: percentage
+  paid_conversion: percentage
+  monthly_growth: percentage
+  monthly_churn: percentage
+  cost_drivers:
+    - label: string
+      unit_label: string
+      cost_per_unit: number
+      units_per_customer_month: number
+
+rules:
+  - variable_cost_per_customer is the sum of cost_per_unit multiplied by units_per_customer_month across cost drivers
+  - loaded_cost_per_customer is variable_cost_per_customer plus fixed_monthly_cost divided by active_customers
+  - base_paid_price is loaded_cost_per_customer divided by one minus gross_margin_target
+  - free tier has a hard usage cap and no overage
+  - starter tier targets solo users with about one normal usage allowance
+  - growth tier targets serious teams with higher allowance and lower overage rate
+  - scale tier targets businesses with commit-style pricing and priority support
+  - overage rate is based on marginal cost per value unit plus margin buffer
+  - risk flags are raised when free usage cost is high, target margin is not met, or metering is unclear
+  - Solvimon import preview converts generated tiers into implementation-ready tier rules and invoice line-item templates
+  - sensitivity scenarios rerun the model for model-cost shock, usage spike, conversion drop, and churn rise
+
+outputs:
+  - pricing_tiers
+  - metering_events
+  - revenue_simulation
+  - audit_score
+  - pricing_page_copy
+  - billing_summary
+  - solvimon_import_preview:
+      schema_version: priceplain.billing.v1
+      includes:
+        - tier rules
+        - invoice line items
+        - metering events
+        - credit policy
+        - implementation notes
+  - preset_comparison:
+      includes:
+        - loaded cost
+        - starter price
+        - month 12 revenue
+        - gross margin
+        - audit score
+  - provider_status:
+      includes:
+        - Claude key configured or missing
+        - FLock key configured or missing
+        - model names
+      exclusions:
+        - no secret values
+        - no external provider call
+  - markdown_report:
+      includes:
+        - pricing tiers
+        - Solvimon import preview
+        - sensitivity checks
+        - provider status
+        - sovereign review
+        - track coverage
+  - sensitivity_scenarios:
+      includes:
+        - month 12 revenue
+        - revenue delta
+        - month 12 COGS
+        - gross margin
+        - margin delta
+        - audit score
+        - break-even month
+  - optional_claude_refinement:
+      when: ANTHROPIC_API_KEY is configured
+      runtime: Vercel AI SDK structured generation
+      focus:
+        - pricing rationale
+        - Solvimon implementation notes
+        - Codeplain specification and acceptance-test plan
+      exclusions:
+        - no broad sponsor-track strategy
+        - no invented integrations
+  - sovereign_ai_review:
+      always_available: deterministic governance scoring
+      optional_provider: FLock OpenAI-compatible API
+      when_provider_enabled: FLOCK_API_KEY is configured
+      focus:
+        - UK sovereign AI governance
+        - data ownership
+        - auditability
+        - model and vendor dependence
+        - procurement risk
+        - public-sector suitability

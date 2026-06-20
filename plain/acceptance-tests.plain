@@ -1,0 +1,231 @@
+scenario: Generate pricing for an AI meeting-notes app
+given:
+  app_name: "Briefly"
+  target_customer: "Remote product teams"
+  value_metric: "processed meeting"
+  monthly_value_units_per_customer: 40
+  active_customers: 500
+  fixed_monthly_cost: 1200
+  gross_margin_target: 75
+  paid_conversion: 8
+  monthly_growth: 12
+  monthly_churn: 4
+  cost_drivers:
+    - label: "LLM transcription and summary"
+      unit_label: "meeting"
+      cost_per_unit: 0.18
+      units_per_customer_month: 40
+    - label: "Storage"
+      unit_label: "GB"
+      cost_per_unit: 0.04
+      units_per_customer_month: 2
+when:
+  the founder runs the pricing engine
+then:
+  - the app generates at least four tiers
+  - paid tiers have positive monthly prices
+  - the free tier has a usage cap
+  - each paid tier has an overage policy
+  - the simulation includes revenue, COGS, gross margin, and break-even status
+  - the billing summary contains metering events
+
+scenario: Switch demo presets
+given:
+  the judge is viewing the default Briefly preset
+when:
+  the judge selects another demo preset
+then:
+  - the app name, product summary, target customer, value metric, assumptions, and cost drivers update
+  - generated tiers recalculate for the selected app
+  - Claude and FLock refinements are cleared because the assumptions changed
+  - the preset options include meeting notes, coding assistant, media generation, and support automation examples
+
+scenario: Flag risky free tier
+given:
+  variable_cost_per_customer: high
+  free_tier_allowance: high
+when:
+  audit runs
+then:
+  - free-tier abuse risk is visible
+  - recommendation includes reducing allowance, adding verification, or moving heavy actions behind credits
+
+scenario: Explain Solvimon fit
+given:
+  generated pricing output
+when:
+  judge opens the billing summary
+then:
+  - the summary names usage-based pricing
+  - the summary names hybrid pricing when seats and usage both matter
+  - the summary lists billing events and invoice line items
+  - the metering tab shows a Solvimon import preview
+  - the preview shows primary meter, plan count, invoice line count, and credit rule count
+  - the export includes tier rules, invoice line items, metering events, credit policy, and JSON handoff data
+
+scenario: Use demo mode during judging
+given:
+  the founder is preparing the live presentation
+when:
+  the founder turns on Demo mode
+then:
+  - the intake form is hidden
+  - the visible tabs are Pricing, Metering, Simulation, and Export
+  - the pricing score strip remains visible
+  - the founder can exit demo mode without losing the current pricing assumptions
+
+scenario: Stress-test pricing assumptions
+given:
+  generated pricing output
+when:
+  judge opens the Simulation tab
+then:
+  - the app shows model-cost shock, usage spike, conversion drop, and churn rise scenarios
+  - each scenario shows month-12 revenue, revenue delta, gross margin, margin delta, audit score, and break-even month
+  - a model-cost shock increases month-12 COGS compared with the base case
+
+scenario: Claude refinement with missing key
+given:
+  ANTHROPIC_API_KEY is not configured
+when:
+  founder clicks Claude refine
+then:
+  - the deterministic pricing model remains visible
+  - the app explains that ANTHROPIC_API_KEY is not configured
+  - the API response includes a stable CONFIGURATION_ERROR code and request id
+  - no pricing inputs are lost
+
+scenario: Claude refinement with configured key
+given:
+  ANTHROPIC_API_KEY is configured
+when:
+  founder clicks Claude refine
+then:
+  - the app calls the server-side refinement endpoint
+  - the endpoint uses the Vercel AI SDK for structured generation
+  - the API key is never exposed to the browser
+  - the response focuses on Solvimon and Codeplain
+  - the response includes pricing rationale, Solvimon implementation notes, Codeplain next steps, suggested changes, and risks
+
+scenario: Explain business potential
+given:
+  judge opens the Business tab
+when:
+  Priceplain renders the submission story
+then:
+  - the customer is a founder building an AI-native app
+  - the problem is variable AI usage cost and unclear monetisation
+  - the product wedge is pricing before billing implementation
+  - the revenue path is credible for a self-serve founder tool
+  - the Solvimon and Codeplain fit are visible without reading the README
+
+scenario: Sovereign AI Review without FLock key
+given:
+  FLOCK_API_KEY is not configured
+when:
+  judge opens the Sovereign tab
+then:
+  - the app shows deterministic governance scoring
+  - the app shows data sovereignty, usage auditability, vendor lock-in, commercial transparency, and public-sector suitability
+  - the app shows procurement questions and governance actions
+  - the app explains the suggested FLock-compatible inference path
+
+scenario: FLock review with missing key
+given:
+  FLOCK_API_KEY is not configured
+when:
+  founder clicks FLock review
+then:
+  - the deterministic sovereign review remains visible
+  - the app explains that FLOCK_API_KEY is not configured
+  - the API response includes a stable CONFIGURATION_ERROR code and request id
+  - no pricing or governance inputs are lost
+
+scenario: Sovereign AI Review with FLock key
+given:
+  FLOCK_API_KEY is configured
+when:
+  founder clicks FLock review
+then:
+  - the app calls the server-side sovereign review endpoint
+  - the endpoint calls FLock's OpenAI-compatible API using a server-side key
+  - the API key is never exposed to the browser
+  - the response focuses on UK sovereign AI, governance, auditability, privacy, institutional procurement, and data ownership
+
+scenario: Export final submission artefact
+given:
+  judge opens the Export tab
+when:
+  Priceplain renders the final export view
+then:
+  - the pricing-page preview is visible
+  - the preset comparison is visible
+  - track coverage for Solvimon, Codeplain, Vercel, and FLock is visible
+  - the demo script is visible
+  - the submission checklist is visible
+  - the full report text is visible as a fallback export artefact
+  - Copy report includes pricing, metering, Solvimon import preview, sensitivity checks, provider status, sovereign review, track coverage, demo script, and checklist
+  - Download Markdown saves the same report text as a markdown file
+
+scenario: Check live provider readiness
+given:
+  judge asks whether live AI calls are configured
+when:
+  Priceplain loads
+then:
+  - the app calls the provider-status endpoint
+  - Claude key status is visible
+  - FLock key status is visible
+  - key values are never exposed to the browser
+  - the status endpoint does not call external providers
+
+scenario: Shareable demo sections
+given:
+  judge is viewing the default Pricing tab
+when:
+  judge opens Business, Sovereign, Simulation, Metering, or Export
+then:
+  - the browser URL updates with the selected tab
+  - reloading the URL opens the same selected tab
+  - using browser back or forward restores the matching tab
+  - an invalid tab query falls back to Pricing
+
+scenario: Smoke-test live demo contract
+given:
+  the local dev server is running
+when:
+  the builder runs npm run smoke
+then:
+  - the home app shell returns successfully
+  - shareable Business and Sovereign URLs return the app shell
+  - priceplan and sovereign-review reject GET requests with METHOD_NOT_ALLOWED
+  - provider-status accepts GET requests
+  - priceplan and sovereign-review reject empty payloads with VALIDATION_ERROR
+  - sovereign-review rejects invalid JSON with INVALID_JSON
+  - every API error response includes a request id
+
+scenario: Test deterministic domain logic
+given:
+  the project dependencies are installed
+when:
+  the builder runs npm run test:domain
+then:
+  - every demo preset produces at least four tiers
+  - paid tiers have overage rates
+  - billing export schema, primary meter, base subscription line items, and overage line items are present
+  - sensitivity scenarios are present
+  - the model-cost shock scenario increases month-12 COGS
+  - sovereign review produces governance signals
+
+scenario: Browser-render judge routes
+given:
+  the local dev server is running
+when:
+  the builder runs npm run test:browser
+then:
+  - the home route renders the Priceplain shell
+  - the Metering route renders the Solvimon import preview
+  - the Simulation route renders sensitivity checks
+  - the Export route renders preset comparison and Markdown download
+  - the Business route renders the tightened pitch
+  - the Sovereign route renders the FLock-aligned governance view

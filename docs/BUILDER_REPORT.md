@@ -1,0 +1,71 @@
+# Builder Report
+
+Run date: 20 June 2026
+Scope: Priceplain application state, demo navigation and functional verification.
+
+## Implemented Behaviour
+
+The output tabs are now URL-backed:
+
+- Clicking `Business`, `Sovereign`, `Simulation`, `Metering` or `Export` updates the browser URL with `?tab=<name>`.
+- Clicking `Pricing` removes the `tab` query parameter.
+- Reloading a tab URL restores the matching selected tab.
+- Browser back and forward restore the selected tab state through `popstate`.
+- Invalid tab queries still fall back to `Pricing`.
+
+This makes the demo sections shareable and recoverable during judging.
+
+The Export tab now also includes a full read-only report text fallback. If clipboard writing is blocked, the app routes to Export and shows a safe message instead of a raw browser error.
+
+Follow-up builder improvements added after the first pass:
+
+- Demo mode hides the intake form for a cleaner judge flow.
+- Metering shows a Solvimon import preview with object counts and JSON handoff.
+- Export includes preset comparison and Markdown download.
+- Provider status reports whether Claude and FLock keys are configured without exposing secrets.
+- `npm run test:browser` checks rendered judge routes in headless Chrome.
+
+## Files Changed
+
+- `api/provider-status.ts`
+- `src/App.tsx`
+- `src/aiClient.ts`
+- `src/types.ts`
+- `plain/acceptance-tests.plain`
+- `README.md`
+- `docs/BUILDER_REPORT.md`
+- `scripts/browser-tests.mjs`
+- `scripts/smoke.mjs`
+- `src/styles.css`
+- `vercel.json`
+- `vite.config.ts`
+
+## Verification
+
+- `npm run build` passed.
+- `npm run test:domain` passed.
+- `npm run test:browser` passed.
+- `npm run smoke` passed.
+- Browser check on `http://localhost:3001`:
+  - Clicking `Business` changed the URL to `/?tab=business` and selected `Business`.
+  - Reloading `/?tab=business` kept `Business` selected.
+  - Clicking `Sovereign` changed the URL to `/?tab=sovereign` and selected `Sovereign`.
+  - Browser back restored `/?tab=business` and selected `Business`.
+  - Browser forward restored `/?tab=sovereign` and selected `Sovereign`.
+  - `/?tab=unknown` selected `Pricing`.
+  - No browser console errors were captured.
+- Routed content check:
+  - `/?tab=business` renders `Submission story` and `Solvimon fit`.
+  - `/?tab=sovereign` renders `FLock Sovereign AI` and `Commercial transparency`.
+  - `/?tab=export` renders full report text with pricing, metering, sovereign review and track coverage.
+
+## Known Limitations
+
+- Invalid tab queries fall back to `Pricing` visually but are not rewritten to `/`.
+- `npm run smoke` covers routed app shells and API envelopes.
+- `npm run test:browser` covers rendered routes, but there is still no full automated browser-click regression suite.
+- Live Claude and FLock success paths still need real API keys for final verification.
+
+## Recommended Next Step
+
+Extend the browser test into full interaction coverage for tab clicks, reload/back/forward state and export download generation.

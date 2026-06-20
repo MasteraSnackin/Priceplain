@@ -1,0 +1,60 @@
+project: Priceplain
+goal: Help founders price AI apps without hand-building monetisation logic.
+
+primary_user:
+  role: Founder of a newly built AI app
+  context: Has rough usage costs, uncertain willingness to pay, and limited time before launch
+  job_to_be_done: Produce a credible first pricing model with usage limits, margin visibility, and billing assumptions
+
+challenge_focus:
+  primary:
+    - Solvimon: strongest chance of becoming a real business
+    - Codeplain: best project built with spec-driven development
+  secondary:
+    - Vercel: deployable app using the Vercel AI SDK for Claude refinement
+    - FLock: sovereign AI governance review with optional FLock-compatible inference
+  out_of_scope:
+    - Sui: requires a real on-chain app using Sui technology
+    - Bilt: requires a working mobile app on bilt.me and go-to-market signal
+    - BGA: requires trading, portfolio, or market-strategy tooling
+
+core_flow:
+  - Founder enters product description, audience, value metric, active users, costs, fixed costs, margin target, conversion, churn, and growth
+  - System calculates cost per active customer and marginal unit economics
+  - System generates Free, Starter, Growth, and Scale pricing tiers
+  - System proposes metering events for billing and analytics
+  - System creates a Solvimon import preview with tier rules, invoice line items, credit policy, metering events, and JSON handoff data
+  - System simulates revenue, cost of goods sold, gross margin, and break-even over twelve months
+  - System stress-tests pricing with model-cost shock, usage spike, conversion drop, and churn rise scenarios
+  - System compares saved AI-app presets so judges can see the model works across different business shapes
+  - System presents a business case that maps to Solvimon and Codeplain judging criteria
+  - System shows whether Claude and FLock keys are configured without exposing secrets
+  - Claude reviews the generated model for pricing rationale, Solvimon fit, and Codeplain implementation next steps when an API key is configured
+  - Vercel AI SDK provides the structured server-side AI generation path
+  - System provides a Sovereign AI Review for institutional buyers evaluating governance, data ownership, auditability, procurement risk, and FLock-compatible inference paths
+  - System exports landing-page pricing copy, sensitivity checks, and a Solvimon-style billing handoff as Markdown
+  - System provides a final Export view with track coverage, demo script, and submission checklist
+  - Demo mode hides the intake form and focuses the visible tabs on Pricing, Metering, Simulation, and Export
+
+non_goals_for_mvp:
+  - No payment collection
+  - No production billing integration
+  - No customer accounts
+  - No live quote-to-cash automation
+  - No broad sponsor-track coverage outside Solvimon, Codeplain, Vercel, and FLock
+
+success_criteria:
+  - A judge can understand the startup use case in under one minute
+  - The generated tiers are tied to usage costs rather than arbitrary price guesses
+  - The pricing output includes explicit metering assumptions
+  - The Solvimon import preview includes invoice line items, tier rules, credit policy, and JSON handoff data
+  - The simulation makes margin and free-tier risk visible
+  - Sensitivity checks show how fragile the model is under cost, usage, conversion, and churn changes
+  - The export tab compares the saved presets
+  - The business tab explains customer, problem, wedge, revenue path, Solvimon fit, and Codeplain fit
+  - The sovereign review tab explains data sovereignty, auditability, vendor lock-in, public-sector suitability, procurement questions, governance actions, and FLock path
+  - The export tab contains a judge-ready demo script and submission checklist
+  - The report can be downloaded as Markdown
+  - The demo works without external credentials
+  - Provider status clearly distinguishes configured and missing live keys
+  - Claude enhancement degrades gracefully when credentials are missing
