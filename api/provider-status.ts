@@ -1,5 +1,5 @@
 import type { ProviderStatus } from "../src/types";
-import { createRequestId, errorResult, methodNotAllowed, type ErrorHandlerResult } from "./errors";
+import { createRequestId, errorResult, methodNotAllowed, type ErrorHandlerResult } from "./errors.js";
 
 type ProviderStatusResult =
   | {

@@ -8,7 +8,7 @@ import {
   errorResult,
   methodNotAllowed,
   type ErrorHandlerResult,
-} from "./errors";
+} from "./errors.js";
 
 interface PriceplanPayload {
   inputs?: PricingInputs;

@@ -13,7 +13,7 @@ import {
   providerTimeoutError,
   timeoutSignal,
   type ErrorHandlerResult,
-} from "./errors";
+} from "./errors.js";
 
 interface SovereignPayload {
   inputs?: PricingInputs;
