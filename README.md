@@ -170,7 +170,7 @@ The deterministic pricing and sovereign-review workflows work without provider c
 
 ## Screenshots or Demo
 
-No deployed URL is recorded in this repository yet.
+Deployed demo: [https://priceplain.vercel.app](https://priceplain.vercel.app)
 
 ![Priceplain pricing workspace](docs/assets/priceplain-pricing.png)
 
