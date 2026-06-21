@@ -141,6 +141,9 @@ Pitch material:
 - `docs/Priceplain_Canva_Deck.pptx` - 8-slide Canva-importable judge deck with generated hero art and screenshots.
 - `docs/PITCH.md` - 30-second pitch, 90-second pitch, demo flow, judge Q&A and overclaiming guardrails.
 - `docs/VIDEO_SCRIPT.md` - 3-minute Popcorn.co video script with sponsor usage and OpenAI-style planning angle.
+- `docs/SUBMISSION_FORM_COPY.md` - copy-ready answers for the hackathon submission form.
+- `docs/JUDGE_ONE_PAGER.md` - one-page judge summary for attaching or sharing.
+- `docs/RELEVANT_FILES_INDEX.md` - index of documents, assets and specs relevant to submission.
 - `docs/SOLVIMON_CHECKOUT_GUIDE.md` - optional guide for creating a Solvimon test checkout page from the Priceplain handoff.
 
 Build for production:
