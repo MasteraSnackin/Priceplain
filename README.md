@@ -182,6 +182,10 @@ The deterministic pricing and sovereign-review workflows work without provider c
 
 Deployed demo: [https://priceplain.vercel.app](https://priceplain.vercel.app)
 
+Generated project hero:
+
+![Priceplain generated hero image](docs/assets/priceplain-hero-generated.png)
+
 ![Priceplain pricing workspace](docs/assets/priceplain-pricing.png)
 
 ![Solvimon handoff preview](docs/assets/priceplain-metering.png)
