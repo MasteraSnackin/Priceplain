@@ -21,6 +21,7 @@ This index lists the files most useful for hackathon submission and judging.
 | `docs/SOLVIMON_STARTUP_PLAN.md` | Solvimon-focused startup plan showing customer thinking, value, monetisation and viability. |
 | `docs/FLOCK_SOVEREIGN_AI_ONE_PAGER.md` | One-page FLock Sovereign AI challenge fit, mapped to governance, trust, privacy and institutional adoption criteria. |
 | `docs/CODEPLAIN_ONE_PAGER.md` | One-page explanation of why and how Codeplain-style `.plain` specs shaped the build. |
+| `output/pdf/Priceplain_Architecture_Overview.pdf` | Architecture PDF with system context, DFD, sequence flows, sponsor map and trust/security controls. |
 | `docs/PITCH.md` | 30-second pitch, 90-second pitch, demo flow, judge Q&A and guardrails. |
 | `docs/VIDEO_SCRIPT.md` | 3-minute script for Popcorn.co or similar demo-video tools. |
 | `docs/SOLVIMON_CHECKOUT_GUIDE.md` | Optional path from Priceplain handoff to Solvimon test checkout. |
@@ -71,7 +72,8 @@ For a concise submission, attach or link:
 4. `docs/SOLVIMON_STARTUP_PLAN.md`
 5. `docs/FLOCK_SOVEREIGN_AI_ONE_PAGER.md`
 6. `docs/CODEPLAIN_ONE_PAGER.md`
-7. `docs/VIDEO_SCRIPT.md`
-8. `docs/SOLVIMON_CHECKOUT_GUIDE.md`
+7. `output/pdf/Priceplain_Architecture_Overview.pdf`
+8. `docs/VIDEO_SCRIPT.md`
+9. `docs/SOLVIMON_CHECKOUT_GUIDE.md`
 
 Keep the GitHub repository as the source of truth for all other files.

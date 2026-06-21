@@ -150,6 +150,7 @@ Pitch material:
 - `docs/SOLVIMON_STARTUP_PLAN.md` - Solvimon-focused startup plan covering customer, value, monetisation and real-world viability.
 - `docs/FLOCK_SOVEREIGN_AI_ONE_PAGER.md` - FLock Sovereign AI challenge fit across governance, trust and institutional adoption.
 - `docs/CODEPLAIN_ONE_PAGER.md` - Codeplain explanation covering why and how the `.plain` specs shaped the build.
+- `output/pdf/Priceplain_Architecture_Overview.pdf` - architecture PDF with system context, DFD, sequence flows, sponsor map and trust controls.
 - `docs/SOLVIMON_CHECKOUT_GUIDE.md` - optional guide for creating a Solvimon test checkout page from the Priceplain handoff.
 
 Build for production:
