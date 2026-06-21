@@ -2,6 +2,8 @@
 
 AI pricing copilot for vibe-coded apps.
 
+![Priceplain generated hero image](docs/assets/priceplain-hero-generated.png)
+
 ## Description
 
 Priceplain helps AI app founders turn rough product descriptions and usage costs into pricing tiers, metering assumptions, revenue simulations, governance checks, and a landing-page-ready pricing table.
@@ -181,10 +183,6 @@ The deterministic pricing and sovereign-review workflows work without provider c
 ## Screenshots or Demo
 
 Deployed demo: [https://priceplain.vercel.app](https://priceplain.vercel.app)
-
-Generated project hero:
-
-![Priceplain generated hero image](docs/assets/priceplain-hero-generated.png)
 
 ![Priceplain pricing workspace](docs/assets/priceplain-pricing.png)
 
