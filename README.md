@@ -138,6 +138,7 @@ For the clean judge flow, turn on Demo mode in the top bar. This hides the intak
 Pitch material:
 
 - `docs/Priceplain_Pitch_Deck.pptx` - 7-slide presentation deck for the hackathon submission.
+- `docs/Priceplain_Canva_Deck.pptx` - 8-slide Canva-importable judge deck with generated hero art and screenshots.
 - `docs/PITCH.md` - 30-second pitch, 90-second pitch, demo flow, judge Q&A and overclaiming guardrails.
 - `docs/VIDEO_SCRIPT.md` - 3-minute Popcorn.co video script with sponsor usage and OpenAI-style planning angle.
 - `docs/SOLVIMON_CHECKOUT_GUIDE.md` - optional guide for creating a Solvimon test checkout page from the Priceplain handoff.
