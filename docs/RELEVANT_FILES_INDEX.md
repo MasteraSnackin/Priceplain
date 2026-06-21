@@ -20,6 +20,7 @@ This index lists the files most useful for hackathon submission and judging.
 | `docs/SUBMISSION_FORM_COPY.md` | Copy-ready answers for the submission form. |
 | `docs/SOLVIMON_STARTUP_PLAN.md` | Solvimon-focused startup plan showing customer thinking, value, monetisation and viability. |
 | `docs/FLOCK_SOVEREIGN_AI_ONE_PAGER.md` | One-page FLock Sovereign AI challenge fit, mapped to governance, trust, privacy and institutional adoption criteria. |
+| `docs/CODEPLAIN_ONE_PAGER.md` | One-page explanation of why and how Codeplain-style `.plain` specs shaped the build. |
 | `docs/PITCH.md` | 30-second pitch, 90-second pitch, demo flow, judge Q&A and guardrails. |
 | `docs/VIDEO_SCRIPT.md` | 3-minute script for Popcorn.co or similar demo-video tools. |
 | `docs/SOLVIMON_CHECKOUT_GUIDE.md` | Optional path from Priceplain handoff to Solvimon test checkout. |
@@ -32,6 +33,7 @@ This index lists the files most useful for hackathon submission and judging.
 | `plain/product-mvp.plain` | Product behaviour and MVP scope. |
 | `plain/pricing-engine.plain` | Pricing rules, assumptions and engine behaviour. |
 | `plain/acceptance-tests.plain` | Judge-readable acceptance scenarios. |
+| `docs/CODEPLAIN_ONE_PAGER.md` | Judge-facing explanation of the Codeplain workflow and spec evidence. |
 
 ## Visual Assets
 
@@ -68,7 +70,8 @@ For a concise submission, attach or link:
 3. `docs/SUBMISSION_FORM_COPY.md`
 4. `docs/SOLVIMON_STARTUP_PLAN.md`
 5. `docs/FLOCK_SOVEREIGN_AI_ONE_PAGER.md`
-6. `docs/VIDEO_SCRIPT.md`
-7. `docs/SOLVIMON_CHECKOUT_GUIDE.md`
+6. `docs/CODEPLAIN_ONE_PAGER.md`
+7. `docs/VIDEO_SCRIPT.md`
+8. `docs/SOLVIMON_CHECKOUT_GUIDE.md`
 
 Keep the GitHub repository as the source of truth for all other files.
