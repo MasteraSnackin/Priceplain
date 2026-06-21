@@ -10,6 +10,9 @@ Priceplain helps AI app founders turn rough product descriptions and usage costs
 
 The product is built for founders shipping AI-native apps before they have a clear monetisation model. It asks for the app concept, target customer, value metric, usage costs, fixed costs, margin target, conversion, growth and churn, then generates a practical pricing plan.
 
+
+Video Demo: https://youtu.be/aqPKt6C70FA
+
 The hackathon focus is Solvimon and Codeplain:
 
 - Solvimon: usage-based and hybrid pricing, metering events, Solvimon import preview, overages, credits, invoice-line assumptions, and revenue simulation.
@@ -21,6 +24,8 @@ Secondary fit:
 - FLock: deterministic Sovereign AI Review plus optional FLock-compatible provider refinement.
 
 Out of scope for this MVP: Sui, Bilt and BGA. Those tracks require materially different products: on-chain Sui apps, mobile app distribution, or trading and portfolio systems.
+
+Demo: https://priceplain.vercel.app
 
 ### Evidence Checked
 
@@ -336,11 +341,6 @@ Before submitting changes:
 ```bash
 npm run build
 ```
-
-## Licence
-
-`<ADD LICENSE>`
-
 ## Contact or Support
 
-`<ADD CONTACT>`
+`<@Masterasnackin>`
