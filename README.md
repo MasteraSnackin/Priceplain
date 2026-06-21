@@ -25,8 +25,6 @@ Secondary fit:
 
 Out of scope for this MVP: Sui, Bilt and BGA. Those tracks require materially different products: on-chain Sui apps, mobile app distribution, or trading and portfolio systems.
 
-Demo: https://priceplain.vercel.app
-
 ### Evidence Checked
 
 Sources checked on 20 June 2026:
