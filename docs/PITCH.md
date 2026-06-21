@@ -20,6 +20,12 @@ The Solvimon fit is direct: Priceplain turns pricing strategy into the objects a
 
 The business wedge is the moment before billing implementation. Founders need confidence before wiring payments or quote-to-cash workflows. Priceplain can become a self-serve pricing toolkit for AI app launches, with higher-value templates and migration support for teams adopting hybrid usage-based billing.
 
+## Why This Matters For OpenAI-Style Planning
+
+Priceplain would also be useful for companies like OpenAI because AI product monetisation is not one pricing problem. Public OpenAI pricing already spans token-priced APIs, model-specific price points, service tiers, enterprise packaging and credit-based products such as Codex. That means product teams need to understand how usage, model choice, latency tier, credits, included limits and customer segment affect gross margin and adoption.
+
+Priceplain helps with that planning layer. A team can model a new AI feature or product package, choose the value metric, estimate cost per user, test free or included usage limits, simulate conversion and churn, and produce a handoff for billing implementation. For OpenAI-style product planning, the value is not only “what should this cost?” but “what should we meter, what should be included, which customers is this for, and how does the model hold up when usage scales?”
+
 ## Demo Flow
 
 1. Start on Pricing with the Briefly preset.
