@@ -160,6 +160,8 @@ ANTHROPIC_API_KEY=your_key_here
 ANTHROPIC_MODEL=claude-sonnet-4-6
 FLOCK_API_KEY=your_key_here
 FLOCK_MODEL=qwen3-30b-a3b-instruct-2507
+SOLVIMON_API_KEY=your_key_here
+SOLVIMON_ENVIRONMENT=test-sandbox
 ```
 
 Environment variables:
@@ -170,6 +172,8 @@ Environment variables:
 | `ANTHROPIC_MODEL` | No | Overrides the default Claude model. |
 | `FLOCK_API_KEY` | No | Enables live FLock sovereign AI refinement. Keep server-side only. |
 | `FLOCK_MODEL` | No | Overrides the default FLock model. |
+| `SOLVIMON_API_KEY` | No | Marks Solvimon sandbox readiness for the checkout handoff workflow. Keep server-side only. |
+| `SOLVIMON_ENVIRONMENT` | No | Labels the Solvimon environment shown in provider status. |
 
 The deterministic pricing and sovereign-review workflows work without provider credentials.
 

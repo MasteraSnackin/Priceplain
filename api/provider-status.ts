@@ -14,6 +14,7 @@ type ProviderStatusResult =
 
 const defaultAnthropicModel = "claude-sonnet-4-6";
 const defaultFlockModel = "qwen3-30b-a3b-instruct-2507";
+const defaultSolvimonEnvironment = "test-sandbox";
 
 export function handleProviderStatus(requestId = createRequestId()): ProviderStatusResult {
   return {
@@ -29,6 +30,10 @@ export function handleProviderStatus(requestId = createRequestId()): ProviderSta
         flock: {
           configured: Boolean(process.env.FLOCK_API_KEY),
           model: process.env.FLOCK_MODEL || defaultFlockModel,
+        },
+        solvimon: {
+          configured: Boolean(process.env.SOLVIMON_API_KEY),
+          model: process.env.SOLVIMON_ENVIRONMENT || defaultSolvimonEnvironment,
         },
       },
     },

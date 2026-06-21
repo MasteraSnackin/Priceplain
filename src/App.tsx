@@ -239,11 +239,13 @@ function buildReport(
 ## Provider status
 - Claude: ${providerStatus.providers.anthropic.configured ? "configured" : "missing"} (${providerStatus.providers.anthropic.model})
 - FLock: ${providerStatus.providers.flock.configured ? "configured" : "missing"} (${providerStatus.providers.flock.model})
+- Solvimon: ${providerStatus.providers.solvimon.configured ? "configured" : "missing"} (${providerStatus.providers.solvimon.model})
 `
     : `
 ## Provider status
 - Claude: unknown until /api/provider-status responds.
 - FLock: unknown until /api/provider-status responds.
+- Solvimon: unknown until /api/provider-status responds.
 `;
   const claudeLines = refinement
     ? `
@@ -787,6 +789,11 @@ function App() {
               configured={providerStatus.providers.flock.configured}
               label="FLock key"
               model={providerStatus.providers.flock.model}
+            />
+            <StatusPill
+              configured={providerStatus.providers.solvimon.configured}
+              label="Solvimon key"
+              model={providerStatus.providers.solvimon.model}
             />
           </>
         ) : (

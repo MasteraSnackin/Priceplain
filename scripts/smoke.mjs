@@ -50,8 +50,10 @@ async function expectProviderStatus() {
   assert(typeof data.requestId === "string" && data.requestId.length > 0, `${path} is missing a request id`);
   assert(typeof data.providers?.anthropic?.configured === "boolean", `${path} is missing Anthropic key status`);
   assert(typeof data.providers?.flock?.configured === "boolean", `${path} is missing FLock key status`);
+  assert(typeof data.providers?.solvimon?.configured === "boolean", `${path} is missing Solvimon key status`);
   assert(!("apiKey" in data.providers.anthropic), `${path} exposed an Anthropic key field`);
   assert(!("apiKey" in data.providers.flock), `${path} exposed a FLock key field`);
+  assert(!("apiKey" in data.providers.solvimon), `${path} exposed a Solvimon key field`);
 }
 
 const checks = [

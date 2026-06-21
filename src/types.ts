@@ -221,6 +221,7 @@ export interface ProviderConfigurationStatus {
 export interface ProviderStatus {
   anthropic: ProviderConfigurationStatus;
   flock: ProviderConfigurationStatus;
+  solvimon: ProviderConfigurationStatus;
 }
 
 export interface ApiErrorPayload {
