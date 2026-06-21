@@ -18,6 +18,7 @@ This index lists the files most useful for hackathon submission and judging.
 | `docs/Priceplain_Canva_Deck.pptx` | Main judge deck, suitable for Canva upload and editing. |
 | `docs/JUDGE_ONE_PAGER.md` | One-page summary of problem, solution, sponsor fit and next steps. |
 | `docs/SUBMISSION_FORM_COPY.md` | Copy-ready answers for the submission form. |
+| `docs/SOLVIMON_STARTUP_PLAN.md` | Solvimon-focused startup plan showing customer thinking, value, monetisation and viability. |
 | `docs/PITCH.md` | 30-second pitch, 90-second pitch, demo flow, judge Q&A and guardrails. |
 | `docs/VIDEO_SCRIPT.md` | 3-minute script for Popcorn.co or similar demo-video tools. |
 | `docs/SOLVIMON_CHECKOUT_GUIDE.md` | Optional path from Priceplain handoff to Solvimon test checkout. |
@@ -64,7 +65,8 @@ For a concise submission, attach or link:
 1. `docs/Priceplain_Canva_Deck.pptx`
 2. `docs/JUDGE_ONE_PAGER.md`
 3. `docs/SUBMISSION_FORM_COPY.md`
-4. `docs/VIDEO_SCRIPT.md`
-5. `docs/SOLVIMON_CHECKOUT_GUIDE.md`
+4. `docs/SOLVIMON_STARTUP_PLAN.md`
+5. `docs/VIDEO_SCRIPT.md`
+6. `docs/SOLVIMON_CHECKOUT_GUIDE.md`
 
 Keep the GitHub repository as the source of truth for all other files.

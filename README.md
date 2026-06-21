@@ -144,6 +144,7 @@ Pitch material:
 - `docs/SUBMISSION_FORM_COPY.md` - copy-ready answers for the hackathon submission form.
 - `docs/JUDGE_ONE_PAGER.md` - one-page judge summary for attaching or sharing.
 - `docs/RELEVANT_FILES_INDEX.md` - index of documents, assets and specs relevant to submission.
+- `docs/SOLVIMON_STARTUP_PLAN.md` - Solvimon-focused startup plan covering customer, value, monetisation and real-world viability.
 - `docs/SOLVIMON_CHECKOUT_GUIDE.md` - optional guide for creating a Solvimon test checkout page from the Priceplain handoff.
 
 Build for production:
